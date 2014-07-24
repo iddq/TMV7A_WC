@@ -81,7 +81,7 @@ const
   //                             APPLICATIONM CONSATNTS
   //======================================================================================
 
-  gcstrAppDate: string = '24 Jul 2014';
+  gcstrAppDate: string = '25 Jul 2014';
   gcstrAppName: string = 'TMV7A';
   gcstrAppVersion: string = '1.0.0';
 
