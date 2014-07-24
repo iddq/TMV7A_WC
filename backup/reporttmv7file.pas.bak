@@ -1,0 +1,106 @@
+unit ReportTMV7File;
+
+{$mode objfpc}{$H+}
+
+//========================================================================================
+//
+//  ReportTMV7File.pas
+//
+//  Calls: AppConstants
+//         AppTypes
+//         AppVariables
+//
+//  Called By: Main : TfrmMain.mnuFilePrintTMV7ReportClick
+//
+//  Ver: 1.0.0
+//
+//  Date: 1 Oct 2013
+//
+//========================================================================================
+
+interface
+
+uses
+  Classes, SysUtils, FileUtil, LR_Class, LR_DSet, LR_DBSet, LR_Desgn, Forms,
+  Controls, Graphics, Dialogs, Buttons, DbCtrls, dbf, db,
+  // Aopplication Units
+  AppConstants, AppTypes, AppVariables;
+type
+
+  { TfrmReportTMV7File }
+
+  TfrmReportTMV7File = class(TForm)
+    frReportTMV7File: TfrReport;
+    frUserDatasetVHF: TfrUserDataset;
+    procedure frReportTMV7FileGetValue(const ParName: String;
+      var ParValue: Variant);
+    procedure frUserDatasetVHFCheckEOF(Sender: TObject; var Eof: Boolean);
+    procedure frUserDatasetVHFFirst(Sender: TObject);
+    procedure frUserDatasetVHFNext(Sender: TObject);
+  private
+    { private declarations }
+    vstrFilename : string;
+    vintRecNr : Longint;
+  public
+    { public declarations }
+  end;
+
+var
+  frmReportTMV7File: TfrmReportTMV7File;
+
+implementation
+
+{$R *.lfm}
+
+{ TfrmReportTMV7File }
+
+var
+  vdtDataType : TDataEntryType;
+
+//========================================================================================
+procedure TfrmReportTMV7File.frReportTMV7FileGetValue(const ParName: String;
+                                                      var ParValue: Variant);
+
+begin
+
+  // TMVFile Filename
+  if ParName = 'Filename' then
+  begin
+    vstrFilename := ExtractFilename(gvstrTMVFileName);
+    ParValue := vstrFilename;
+  end;// if ParName = 'Filename' then
+
+  if ParName = 'ChNr' then
+  begin
+    if vintRecNr = 0 then
+     ParValue := 'VHF'
+    else
+       ParValue := vintRecNr;
+
+  end;// if ParName = 'ChNr'
+
+end;// procedure TfrmReportTMV7File.frReportTMV7FileGetValue
+
+//========================================================================================
+//          VHF DATA
+//========================================================================================
+procedure TfrmReportTMV7File.frUserDatasetVHFFirst(Sender: TObject);
+begin
+  vintRecNr := 0;
+end;// procedure TfrmReportTMV7File.frUserDataset1First
+
+//========================================================================================
+procedure TfrmReportTMV7File.frUserDatasetVHFNext(Sender: TObject);
+begin
+  Inc(vintRecNr);
+end;// procedure TfrmReportTMV7File.frUserDataset1Next
+
+//========================================================================================
+procedure TfrmReportTMV7File.frUserDatasetVHFCheckEOF(Sender: TObject; var Eof: Boolean);
+begin
+  Eof := vintRecNr > 10 {gcbytMaxVHFChannels};
+end;// procedure TfrmReportTMV7File.frUserDataset1CheckEOF
+
+//========================================================================================
+end.// unit ReportTMV7File;
+

@@ -1,0 +1,26 @@
+object frmReportTMV7File: TfrmReportTMV7File
+  Left = 460
+  Height = 276
+  Top = 199
+  Width = 511
+  Caption = 'frmReportTMV7File'
+  LCLVersion = '1.0.10.0'
+  object frReportTMV7File: TfrReport
+    Dataset = frUserDatasetVHF
+    InitialZoom = pzDefault
+    Options = []
+    PreviewButtons = [pbZoom, pbLoad, pbSave, pbPrint, pbFind, pbHelp, pbExit]
+    DataType = dtDataSet
+    OnGetValue = frReportTMV7FileGetValue
+    left = 48
+    top = 16
+  end
+  object frUserDatasetVHF: TfrUserDataset
+    RangeEnd = reCount
+    OnCheckEOF = frUserDatasetVHFCheckEOF
+    OnFirst = frUserDatasetVHFFirst
+    OnNext = frUserDatasetVHFNext
+    left = 48
+    top = 72
+  end
+end

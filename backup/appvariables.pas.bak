@@ -1,0 +1,228 @@
+unit AppVariables;
+
+{$mode objfpc}{$H+}
+
+//========================================================================================
+//
+//  AppVariables.pas
+//
+//  Calls: AppConstants
+//
+//  Called By: AGCommand : SetVHF_AGValue
+//                         SetUHF_AGValue
+//             BCCommand : TogglePTTBand
+//             BUFCommand : BUFResponseHandler
+//                          SetBuffer
+//             ColourSchemes : SetColourScheme
+//             COMPort : TfrmCOMPort.bbtOkClick
+//             DataEntry : TfrmDataEntry.FormActivate
+//                         TfrmDataEntry.bbtSaveClick
+//             DataEntry_FAV : DataEntry_FAV_Init
+//             DataEntry_UHFMEM : DataEntry_UHFMEM_Init
+//             DataEntry_VHFMEM : DataEntry_VHFMEM_Init
+//             Fav : SetFAVChannel
+//             Final : Finalize
+//             INIStuff : ReadINIFile
+//             Init : Initialize
+//             LCDDisplay : DisplayBCStatus
+//             Main : SendTimeoutTimerReset
+//                    TfrmMain.tmrSendTimeoutTimer
+//                    TfrmMain.mnuFileNewClick
+//                    TfrmMain.mnuFileSaveClick
+//                    TfrmMain.mnuFileSaveAsClick
+//             Mem : TfrmMEM.Setup
+//             Mem__VHF : LoadVHFStringGrid
+//                        SetVHFChannel
+//             Mem__UHF : LoadUHFStringGrid
+//                        SetUHFChannel
+//             Mute : ToggleMute
+//             PSCommand : PSResponseHandler
+//                         TogglePowerOnOff
+//             Register : TdlgRegister.bbtOkClick
+//                        TdlgRegister.bbtCancelClick
+//             ReportTMV7Files : TfrmReportTMV7File.frReportTMV7FileGetValue
+//             ResponseParser : ParseRespons
+//             Reverse : ToggleReverse
+//             RXCommand : RXResponseHandler
+//             SerialStuff : SendCommand
+//             SQCommand :  SetVHF_SQValue
+//                          SetUHF_SQValue
+//             StatusBar : DisplayCOMPortStatus
+//             TMVFiles : CreateNewTMVFile
+//                        MakeUHFRecord
+//                        MakeFAVRecord
+//                        OpenTMVFile
+//                        ParseUHFRecord
+//                        ParseFAVRecord
+//                        ParseDTMFRecord
+//                        WriteTMVFile
+//             TMVFiles_FAV : ParseFAVRecord
+//                            MakeFAVRecord
+//             TMVFiles_UHF : ParseUHFRecord
+//                            MakeUHFRecord
+//             TMVFiles_VHF : ParseVHFRecord
+//                            MakeVHFRecord
+//             TXCommand : TXResponseHandler
+//             Utilities
+//
+//  Ver: 1.0.0
+//
+//  Date: 7 Dec 2013
+//
+//========================================================================================
+
+interface
+
+uses
+  Classes, Graphics, SysUtils,
+  // Application Units
+  AppConstants;
+
+var
+
+//========================================================================================
+//                          APPLICATION VARIABLES
+//========================================================================================
+
+gvstrAppPath : string;
+gvblnTMV7OnLine : Boolean;
+
+//========================================================================================
+//                        ARRAY VARIABLES
+//========================================================================================
+
+// Channel Array Variables
+gvstrUHFChannelDataArray : array[gcbytArrayStartValue..gcbytMaxUHFChannels,
+                               gcbytArrayStartValue..gcbytMaxChannelFieldCount] of string;
+gvstrVHFChannelDataArray : array[gcbytArrayStartValue..gcbytMaxVHFChannels,
+                               gcbytArrayStartValue..gcbytMaxChannelFieldCount] of string;
+gvstrFAVChannelDataArray : array[gcbytArrayStartValue..gcbytMaxFAVChannels,
+                               gcbytArrayStartValue..gcbytMaxChannelFieldCount] of string;
+
+// DTMF Array Variables
+gvstrDTMFCodeDataArray : array[gcbytArrayStartValue..gcbytMaxDTMFEntries] of string;
+
+// TMV7 Array Variables
+gvstrToneArray : array[0..gcbytMaxToneIndex] of string;
+gvstrStepArray : array[0..9] of string;
+
+//========================================================================================
+//          COLOUR SCHEMES
+//========================================================================================
+gvstrCurrentColourScheme : String;
+
+//========================================================================================
+//                               FILE VARIABLES
+//========================================================================================
+
+// TMVFile Variables
+gvstrTMVDataChanged : Boolean;
+gvstrTMVFileName : string;
+
+//========================================================================================
+//                            LCD Display Variables
+//========================================================================================
+
+gvblnPowerState : Boolean;
+gvblnTXStatus : Boolean;
+
+//========================================================================================
+//                              MEM VARIABLES
+//========================================================================================
+gvintSelectedRow : Longint;
+
+//========================================================================================
+//                                  MUTE VARIABLES
+//========================================================================================
+gvblnMute : Boolean;
+
+//========================================================================================
+//                           REGISTRATION VARIABLES
+//========================================================================================
+gvblnRegistered : boolean;
+gvstrRegisteredName : string;
+gvstrRegisteredCall : string;
+gvstrRegistrationKey : string;
+
+//========================================================================================
+//                               REVERSE VARIABLES
+//========================================================================================
+gvstrUHFReverseState : string;
+gvstrVHFReverseState : string;
+gvstrUHFOrigRXFrequency : string;
+gvstrVHFOrigRXFrequency : string;
+gvstrUHFOrigShift : string;
+gvstrVHFOrigShift : string;
+gvstrUHFOrigTone : string;
+gvstrUHFOrigCTCSS : string;
+gvstrVHFOrigTone : string;
+gvstrVHFOrigCTCSS : string;
+
+//========================================================================================
+//                             SERIAL PORT VARIABLES
+//========================================================================================
+
+// Serial Port Variables
+gvblnKeywordMatched : boolean;
+gvblnSendTimeout : boolean;
+gvstrCOMPort : string;
+gvstrKeywordRcvd : string;
+gvstrKeywordSent : string;
+
+//========================================================================================
+//                                  VFO VARIABLES
+//========================================================================================
+
+gvstrPTTBand : string;
+gvstrCtrlBand : string;
+
+// UHF VFO Variables
+gvstrUHFDataSource : string;      // FAV, MEM, VFO
+gvstrUHFChannelNr : string;       // [1..99] 1 or 2 digits
+gvstrUHFRXFrequency : string;     // [nnnnnnnnnnn] 11 digits - Freq in KHz
+gvstrUHFStep : string;            // [0..9] Single digit
+gvstrUHFShift : string;           // [0..2] Single digit
+gvstrUHFReverse : string;         // [0,1] Single digit
+gvstrUHFTone : string;            // [0,1] Single digit
+gvstrUHFCTCSS : string;           // [0,1] Single digit
+gvstrUHFDTSS : string;            // [0,1] Single digit
+gvstrUHFToneNr : string;          // [01,03..39] Two digits
+gvstrUHFDTSSCode : string;        // [nnn] Three digits
+gvstrUHFCTCSSNr : string;         // [01,03..39] Two digits
+gvstrUHFOffset : string;          // [nnnnnnnnn] Nine digits - Hz
+gvstrUHFScan : string;            // [0,1] Single digit
+gvstrUHFSplitFrequency : string;  // [nnnnnnnnnnn] 11 digits - Freq in KHz
+gvstrUHFSplitStep : string;       // [0..9] Single digit
+gvstrUHFRFPower : string;         // [H,M,L] Single character
+gvstrUHFChannelName : string;     // 0 to 15 Characters
+gvstrUHFChannelComments : string; // 0 to 32 Characters
+gvstrUHFAudioLevel : string;      // [00..1F] Hex digits
+gvstrUHFSquelchLevel : string;    // [00..1F] Hex digits
+
+// VHF VFO Variables
+gvstrVHFDataSource : string;      // FAV, MEM, VFO
+gvstrVHFChannelNr : string;       // [1..99] 1 or 3 digits
+gvstrVHFRXFrequency : string;     // [nnnnnnnnnnn] 11 digits - Freq in KHz
+gvstrVHFStep : string;            // [0..9] Single digit
+gvstrVHFShift : string;           // [0..2] Single digit
+gvstrVHFReverse : string;         // [0,1] Single digit
+gvstrVHFTone : string;            // [0,1] Single digit
+gvstrVHFCTCSS : string;           // [0,1] Single digit
+gvstrVHFDTSS : string;            // [0,1] Single digit
+gvstrVHFToneNr : string;          // [01,03..39] Two digits
+gvstrVHFDTSSCode : string;        // [nnn] Three digits
+gvstrVHFCTCSSNr : string;         // [01,03..39] Two digits
+gvstrVHFOffset : string;          // [nnnnnnnnn] Nine digits - Hz
+gvstrVHFScan : string;            // [0,1] Single digit
+gvstrVHFSplitFrequency : string;  // [nnnnnnnnnnn] 11 digits - Freq in KHz
+gvstrVHFSplitStep : string;       // [0..9] Single digit
+gvstrVHFRFPower : string;         // [H,M,L] Single character
+gvstrVHFChannelName : string;     // 0 to 15 Characters
+gvstrVHFChannelComments : string; // 0 to 32 Characters
+gvstrVHFAudioLevel : string;      // [00..1F] Hex digits
+gvstrVHFSquelchLevel : string;    // [00..1F] Hex digits
+
+implementation
+
+end.// unit AppVariables
+

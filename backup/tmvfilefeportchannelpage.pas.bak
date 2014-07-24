@@ -1,0 +1,36 @@
+unit TMVFileFeportChannelPage;
+
+{$mode objfpc}{$H+}
+//========================================================================================
+//
+//  TMV7FileReportChannelPage.pas
+//
+//  Calls:
+//
+//  Called By: TMVFileReport : PrintTMVFile
+//
+//  Ver: 1.0.0
+//
+//  Date: 10 Nov 2013
+//
+//========================================================================================
+
+
+interface
+
+uses
+  Classes, SysUtils;
+
+procedure PrintVHFChannel(vbytChannelNr, vstrTStr);
+
+implementation
+
+//========================================================================================
+procedure PrintVHFChannel(vbytChannelNr, vstrTStr);
+begin
+
+end;// procedure PrintVHFChannel(vbytChannelNr, vstrTStr);
+
+//========================================================================================
+end.// unit TMVFileFeportChannelPage
+

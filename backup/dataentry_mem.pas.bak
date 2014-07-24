@@ -1,0 +1,179 @@
+unit DataEntry_MEM;
+
+{$mode objfpc}{$H+}
+
+//========================================================================================
+//
+//  DataEntry_MEM.pas
+//
+//  Calls: DataEntry
+//
+//  Called By: DataEntry : TfrmDataEntry.FormActivate
+//
+//  Ver: 1.0.0
+//
+//  Date: 21 Jul 2013
+//
+//========================================================================================
+
+
+interface
+
+uses
+  Classes, SysUtils;
+
+procedure DataEntry_MEM_Init;
+
+implementation
+
+uses
+  DataEntry;
+
+//========================================================================================
+procedure DataEntry_MEM_Init;
+
+var
+  vbytToneNr : Byte;
+
+begin
+
+    frmDataEntry.Caption := frmDataEntry.cstrMemFormTitle;
+    frmDataEntry.edtSource.Text := Format('MEM%dd',[frmDataEntry.vbytChannelNumber]);
+{***
+    //=====================
+    // Set the RX Frequency
+    //=====================
+
+    if Length(gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+              gcbytRXFrequencyField]) > 0 then
+              frmDataEntry.edtRXFrequency.Text :=
+      Copy(gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+        gcbytRXFrequencyField], 3, 3) +
+      '.' +
+      Copy(gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+        gcbytRXFrequencyField], 6, 3)
+    else
+      frmDataEntry.edtRXFrequency.Text := '';
+
+    //==========================
+    // Set the Band Radio buttons
+    //==========================
+
+    if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                     gcbytVFOField] = gcstrUHF then
+      frmDataEntry.rbtUHF.Checked := True
+    else
+      frmDataEntry.rbtVHF.Checked := True;
+
+    //===========================
+    // Set the Shift Radio buttons
+    //===========================
+
+    if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                     gcbytShiftField] = gcstrShiftPlus then
+      frmDataEntry.rbtPlus.Checked := True
+    else if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                     gcbytShiftField] = gcstrShiftMinus then
+      frmDataEntry.rbtMinus.Checked := True
+    else
+      frmDataEntry.rbtSimplex.Checked := True;
+
+    //======================================
+    // Set the Shift offset and calulate and Display the TX Frequency
+    //======================================
+
+     if Length(frmDataEntry.edtRXFrequency.Text) > 0 then
+     begin
+       frmDataEntry.edtTXFrequency.Text := frmDataEntry.CalculateTXFrequency;
+       frmDataEntry.SetShiftOffset;
+     end
+     else
+       frmDataEntry.edtTXFrequency.Text := '';
+
+    //====================================================
+    // Set the Tone Checkboxes and Tone Frequency Combobox
+    //====================================================
+    if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                   gcbytToneField] = gcstrOn then
+      frmDataEntry.rbtTone.Checked := True
+    else if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                   gcbytCTCSSField] = gcstrOn then
+      frmDataEntry.rbtCTCSS.Checked := True
+    else
+      frmDataEntry.rbtNoTones.Checked := True;
+
+    //===========================================================
+    // Determine the correct Index and set the Tone Freq Combobox
+    //===========================================================
+
+    if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                               gcbytToneNrField] = '' then vbytToneNr := 1
+    else vbytToneNr := StrToInt(gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                               gcbytToneNrField]);
+    frmDataEntry.cbxTones.ItemIndex := GetToneIndexFromToneNr( vbytToneNr);
+
+    // Now Clear the Text field if there is no Tone function selected.
+    if frmDataEntry.rbtNoTones.Checked then
+      frmDataEntry.cbxTones.Text := '';
+
+    //======================================
+    //  Set the DTSS Checkbox and Code field
+    //======================================
+    if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                   gcbytDTSSField] = gcstrOn then
+    begin
+      frmDataEntry.chkDTSS.Checked := True;
+      frmDataEntry.EnableDTSSCode;
+    end
+    else
+    begin
+      frmDataEntry.chkDTSS.Checked := False;
+      frmDataEntry.DisableDTSSCode;
+    end;
+
+    frmDataEntry.SetDTSSCode;
+
+    //======================
+    // Set the Scan Checkbox
+    //======================
+
+    if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                   gcbytScanField] = gcstrOn then
+      frmDataEntry.chkScan.Checked := True
+    else
+      frmDataEntry.chkScan.Checked := False;
+
+    //===============================
+    // Set the RF Power Radio buttons
+    //===============================
+
+    if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                     gcbytRFPowerField] = gcstrRFPowerLow then
+       frmDataEntry.rbtRFPowerLow.Checked := True
+    else if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                     gcbytShiftField] = gcstrRFPowerMedium then
+      frmDataEntry.rbtRFPowerMedium.Checked := True
+    else
+      frmDataEntry.rbtRFPowerHigh.Checked := True;
+
+    //=====================
+    // Set the Channel Name
+    //=====================
+
+    frmDataEntry.edtChannelName.Text := gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                        gcbytChannelNameField];
+
+    //=================
+    // Set the Comments
+    //=================
+
+    frmDataEntry.edtComments.Text := gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                     gcbytCommentsField]; }
+
+end;// procedure DataEntry_MEM_Init
+
+//========================================================================================
+
+end.// unit DataEntry_MEM;
+
+

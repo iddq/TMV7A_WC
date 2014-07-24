@@ -1,0 +1,97 @@
+object frmMEM: TfrmMEM
+  Left = 664
+  Height = 397
+  Top = 160
+  Width = 694
+  BorderIcons = [biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'MEM'
+  ClientHeight = 397
+  ClientWidth = 694
+  Position = poScreenCenter
+  LCLVersion = '1.0.14.0'
+  object sgrVHF: TStringGrid
+    Left = 25
+    Height = 120
+    Top = 24
+    Width = 128
+    AutoAdvance = aaNone
+    AutoEdit = False
+    ColCount = 15
+    DefaultColWidth = 100
+    FixedCols = 0
+    Font.Height = -13
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goSmoothScroll]
+    ParentFont = False
+    TabOrder = 0
+    TitleFont.Height = -13
+    OnDblClick = sgrVHFDblClick
+    OnMouseUp = sgrVHFMouseUp
+  end
+  object bbtEdit: TBitBtn
+    Left = 196
+    Height = 24
+    Top = 360
+    Width = 75
+    Caption = 'Edit'
+    OnClick = bbtEditClick
+    TabOrder = 1
+  end
+  object bbtClose: TBitBtn
+    Left = 380
+    Height = 24
+    Top = 359
+    Width = 75
+    Caption = 'Close'
+    ModalResult = 11
+    OnClick = bbtCloseClick
+    TabOrder = 2
+  end
+  object bbtSelect: TBitBtn
+    Left = 284
+    Height = 24
+    Top = 359
+    Width = 75
+    Caption = 'Select'
+    OnClick = bbtSelectClick
+    TabOrder = 3
+  end
+  object sgrUHF: TStringGrid
+    Left = 168
+    Height = 120
+    Top = 24
+    Width = 128
+    AutoAdvance = aaNone
+    AutoEdit = False
+    ColCount = 15
+    DefaultColWidth = 100
+    FixedCols = 0
+    Font.Height = -13
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goSmoothScroll]
+    ParentFont = False
+    TabOrder = 4
+    TitleFont.Height = -13
+    OnDblClick = sgrUHFDblClick
+    OnMouseUp = sgrUHFMouseUp
+  end
+  object sgrDTMF: TStringGrid
+    Left = 320
+    Height = 120
+    Top = 24
+    Width = 128
+    ColCount = 4
+    FixedCols = 0
+    Font.Height = -13
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goSmoothScroll]
+    ParentFont = False
+    ScrollBars = ssVertical
+    TabOrder = 5
+    TitleFont.Height = -13
+    ColWidths = (
+      38
+      176
+      64
+      64
+    )
+  end
+end

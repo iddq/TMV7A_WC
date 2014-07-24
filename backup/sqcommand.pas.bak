@@ -1,0 +1,87 @@
+unit SQCommand;
+
+{$mode objfpc}{$H+}
+
+//========================================================================================
+//
+//  SQCommand.pas
+//
+//  This unit gets and processes the Squelch Level controls for both UHF and VHF VFOs.
+//
+//  Calls: AppConstants
+//         AppVariables
+//         SerialStuff : SendCommand
+//
+//  Called By: Init : Initialize
+//             Main : uekVHFSquelchMouseUp
+//                    uekUHFSquelchMouseUp
+//             ResponseParser : ParseResponse
+//
+//  Ver: 1.0.0
+//
+//  Date: 6 Jul 2013
+//
+//========================================================================================
+
+interface
+
+uses
+  Classes, Dialogs, SysUtils,
+  // Application Units
+  AppCOnstants, AppVariables, SerialStuff;
+
+procedure SetVHF_SQValue(vstrValue : String);
+procedure SetUHF_SQValue(vstrValue : String);
+procedure SQResponseHandler(vstrKeywordRcvd, vstrParameters : string);
+
+implementation
+
+uses
+    Main;
+
+procedure SQResponseHandler (vstrKeywordRcvd, vstrParameters : string);
+
+{var
+  vstrBand : string;
+  vstrValue : string;}
+
+begin
+
+{  // First we parse the reponse parameters (P1,P2) where P1 id the Band (0 = VHF, 1 = UHF)
+  // and P2 is the Audio Gain value in Hex (00..1F).
+  vstrBand := Copy(vstrParameters, 1,1);
+  vstrValue := '$'+Copy(vstrParameters, 3,2);
+
+//  showmessage(vstrBand + ' - ' + vstrValue + ' - ' + IntToStr (StrToInt(vstrValue)));
+
+  if vstrBand = gcstrUHF then
+  begin
+//      frmMain.uekUHFSquelch.position := StrToInt(vstrValue);
+  end
+  else
+  begin
+//      frmMain.uekVHFSquelch.position := StrToInt(vstrValue);
+  end;// if vstrBand = gcstrUHF     }
+
+end;// procedure SQResponseHandler
+
+//========================================================================================
+procedure SetVHF_SQValue(vstrValue : String);
+begin
+  SendCommand('SQ',gcstrVHF + ',' + vstrValue);
+  frmMain.uekVHFSquelch.position := StrToInt('$' + vstrValue);
+  gvstrVHFSquelchLevel := vstrValue;
+end;// procedure SetVHF_SQValue
+
+//========================================================================================
+procedure SetUHF_SQValue(vstrValue : String);
+begin
+  SendCommand('SQ',gcstrUHF + ',' + vstrValue);
+  frmMain.uekUHFSquelch.position := StrToInt('$' + vstrValue);
+  gvstrUHFSquelchLevel := vstrValue;
+end;// procedure SetUHF_SQValue
+
+//========================================================================================
+
+end.// unit SQCommand;
+

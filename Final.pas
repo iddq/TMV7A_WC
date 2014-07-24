@@ -1,0 +1,76 @@
+unit Final;
+
+{$mode objfpc}{$H+}
+
+//========================================================================================
+//
+//  Final.pas
+//
+//  Calls: AppConstants
+//         AppVariables
+//         INIStuff : WriteINIFile
+//         Main
+//         Mute : SetMuteOff
+//         Reverse : UHFReverseOff
+//                   VHFReverseOff
+//         TMVFiles : WriteTMVFile
+//
+//  Called By: Main : TfrmMain.FormClose;
+//
+//  Ver: 1.0.0
+//
+//  Date: 3 Dec 2013
+//
+//========================================================================================
+
+interface
+
+uses
+  Classes, Controls, StdCtrls, SysUtils, Dialogs,
+  // Application units
+  AppConstants, AppVariables, INIStuff, Mute, Reverse, TMVFiles;
+
+
+procedure Finalize;
+
+implementation
+
+uses
+  Main;
+
+procedure Finalize;
+begin
+
+  if gvblnMute then
+    SetMuteOff;
+
+  if gvstrUHFReverseState = gcstrOn then
+  begin
+    gvstrUHFRXFrequency := gvstrUHFOrigRXFrequency;
+    gvstrUHFShift := gvstrUHFOrigShift;
+    UHFReverseOff;
+  end;
+
+  if gvstrVHFReverseState = gcstrOn then
+  begin
+    gvstrVHFRXFrequency := gvstrVHFOrigRXFrequency;
+    gvstrVHFShift := gvstrVHFOrigShift;
+    VHFReverseOff;
+  end;
+
+  frmMain.sdpoSerial1.Active := False;
+
+  if gvstrTMVDataChanged then
+  begin
+    if MessageDlg('Save It ?', mtInformation, [mbYes, mbNo], 0) =  mrYes then
+      SaveTMVFileAs
+    else
+      showmessage('Cancelled');
+  end;// if gvstrTMVDataChanged
+
+  WriteINIFile;
+
+end;// procedure Finalize
+
+end.// unit Final
+

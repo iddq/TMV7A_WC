@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <PathDelim Value="\"/>
+    <General>
+      <SessionStorage Value="InProjectDir"/>
+      <MainUnit Value="0"/>
+      <Title Value="TMV7A"/>
+      <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <Icon Value="0"/>
+    </General>
+    <i18n>
+      <EnableI18N LFM="False"/>
+    </i18n>
+    <VersionInfo>
+      <UseVersionInfo Value="True"/>
+      <AutoIncrementBuild Value="True"/>
+      <MajorVersionNr Value="1"/>
+      <BuildNr Value="46"/>
+      <StringTable ProductVersion=""/>
+    </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="12">
+      <Item1>
+        <PackageName Value="SDFLaz"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="rx"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="Printer4Lazarus"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="sqlite3laz"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="FCL"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="DBFLaz"/>
+      </Item6>
+      <Item7>
+        <PackageName Value="lazreport"/>
+      </Item7>
+      <Item8>
+        <PackageName Value="LazControls"/>
+      </Item8>
+      <Item9>
+        <PackageName Value="RackCtlsPkg"/>
+      </Item9>
+      <Item10>
+        <PackageName Value="uEControls"/>
+      </Item10>
+      <Item11>
+        <PackageName Value="SdpoSerialLaz"/>
+      </Item11>
+      <Item12>
+        <PackageName Value="LCL"/>
+      </Item12>
+    </RequiredPackages>
+    <Units Count="46">
+      <Unit0>
+        <Filename Value="TMV7A.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TMV7A"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="Main.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Main"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="Init.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Init"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="Final.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Final"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="appconstants.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="AppConstants"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="appvariables.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="AppVariables"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="INIStuff.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="INIStuff"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="statusbar.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="StatusBar"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="COMPort.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmCOMPort"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="COMPort"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="responseparser.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ResponseParser"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="lcddisplay.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="LCDDisplay"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="bccommand.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="BCCommand"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="pscommand.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PSCommand"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="serialstuff.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SerialStuff"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="bufcommand.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="BUFCommand"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="colourschemes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ColourSchemes"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="bycommand.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="BYCommand"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="dataentry.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmDataEntry"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="DataEntry"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="fav.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Fav"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="tmvfiles.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TMVFiles"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="utilities.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Utilities"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="dataentry_fav.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DataEntry_FAV"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="apptypes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="AppTypes"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="smcommand.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SMCommand"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="agcommand.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="AGCommand"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="sqcommand.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SQCommand"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="rxcommand.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RXCommand"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="txcommand.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TXCommand"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="mute.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Mute"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="mem.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmMEM"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="MEM"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="dataentry_vhfmem.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="dataentry_vhfmem"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="mem_vhf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MEM_VHF"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="mem_uhf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MEM_UHF"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="mem_dtmf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MEM_DTMF"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="tmvfiles_dtmf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TMVFiles_DTMF"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="tmvfiles_uhf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TMVFiles_UHF"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="tmvfiles_vhf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TMVFiles_VHF"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="tmvfiles_fav.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TMVFiles_FAV"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="dataentry_uhfmem.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DataEntry_UHFMem"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="register.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="dlgRegister"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Register"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="splashabout.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="dlgSplashAbout"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="SplashAbout"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="nagscreen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="dlgNagScreen"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="NagScreen"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="hutils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="HUtils"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="reverse.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Reverse"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="pccommand.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PCCommand"/>
+      </Unit44>
+      <Unit45>
+        <Filename Value="tmvfilereport.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmTMVFileReport"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="TMVFileReport"/>
+      </Unit45>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="TMV7A"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <SyntaxMode Value="Delphi"/>
+      </SyntaxOptions>
+    </Parsing>
+    <CodeGeneration>
+      <Checks>
+        <IOChecks Value="True"/>
+        <RangeChecks Value="True"/>
+        <OverflowChecks Value="True"/>
+        <StackChecks Value="True"/>
+      </Checks>
+    </CodeGeneration>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerMessages>
+        <MsgFileName Value=""/>
+      </CompilerMessages>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="5">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+      <Item4>
+        <Name Value="Exception"/>
+      </Item4>
+      <Item5>
+        <Name Value="EFCreateError"/>
+      </Item5>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

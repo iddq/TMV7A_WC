@@ -1,0 +1,67 @@
+unit AGCommand;
+
+{$mode objfpc}{$H+}
+
+//========================================================================================
+//
+//  AGCommand.pas
+//
+//  This unit gets and processes the Audio Gain controls for both UHF and VHF VFOs.
+//
+//  Calls: AppConstants
+//         AppVariables
+//         SerialStuff : SendCommand
+//
+//  Called By: Init : Initialize
+//             Main : SetVHF_AGValue
+//             Mute : SetMuteOn
+//                    SetMuteOff
+//             ResponseParser : ParseResponse
+//
+//  Ver: 1.0.0
+//
+//  Date: 6 Apr 2014
+//
+//========================================================================================
+
+interface
+
+uses
+  Classes, Dialogs, SysUtils,
+  // Application Units
+  AppConstants, AppVariables, SerialStuff;
+
+procedure SetVHF_AGValue(vstrValue : String);
+procedure SetUHF_AGValue(vstrValue : String);
+procedure AGResponseHandler(vstrKeywordRcvd, vstrParameters : string);
+
+implementation
+
+uses
+    Main;
+
+procedure AGResponseHandler (vstrKeywordRcvd, vstrParameters : string);
+begin
+// This procedure is a stub. It does nothing but clear and AG response received
+end;// procedure AGResponseHandler
+
+//========================================================================================
+procedure SetVHF_AGValue(vstrValue : String);
+begin
+  SendCommand('AG',gcstrVHF + ',' + vstrValue);
+  frmMain.uekVHFVolume.position := StrToInt('$' + vstrValue);
+  gvstrVHFAudioLevel := vstrValue;
+end;// procedure SetVHF_AGValue
+
+//========================================================================================
+procedure SetUHF_AGValue(vstrValue : String);
+begin
+  SendCommand('AG',gcstrUHF + ',' + vstrValue);
+  frmMain.uekUHFVolume.position := StrToInt('$' + vstrValue);
+  gvstrUHFAudioLevel := vstrValue;
+end;// procedure SetUHF_AGValue
+
+//========================================================================================
+
+end.// unit AGCommand;
+

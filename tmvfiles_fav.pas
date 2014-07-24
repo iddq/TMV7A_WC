@@ -1,0 +1,413 @@
+unit TMVFiles_FAV;
+
+{$mode objfpc}{$H+}
+
+//========================================================================================
+//
+//  TMVFiles_FAV.pas
+//
+//  Calls: AppConstants
+//         AppVariables
+//         Utilities : GetToneFrequencyFromToneNr
+//
+//  Called By: TMVFiles : OpenTMVFile
+//
+//  Ver: 1.0.0
+//
+//  Date: 9 Aug 2013
+//
+//========================================================================================
+
+interface
+
+uses
+  Classes, SysUtils,
+  // Application Units
+  AppConstants, AppVariables, Utilities;
+
+function MakeFAVRecord(vbytRecord : Byte) : string;
+procedure ParseFAVRecord(vbytRecNr : Byte; vstrRecord : string);
+
+implementation
+
+//========================================================================================
+function MakeFAVRecord(vbytRecord : Byte) : string;
+
+var
+  vstrTRecord : string;
+  vstrTOffset : string;
+
+begin
+
+  // Record Nr
+  vstrTRecord := IntToStr(vbytRecord) + ',';
+
+  // VFO
+  if gvstrFAVChannelDataArray[vbytRecord, gcbytVFOField] = gcstrVHF then
+    vstrTRecord := vstrTRecord + gcstrTMV7VFO_VHF + ','
+  else if gvstrFAVChannelDataArray[vbytRecord, gcbytVFOField] = gcstrUHF then
+    vstrTRecord := vstrTRecord + gcstrTMV7VFO_UHF + ','
+  else
+    vstrTRecord := vstrTRecord + '' + ',';
+
+  // RX Frequency
+  if Length(gvstrFAVChannelDataArray[vbytRecord, gcbytRXFrequencyField]) > 0 then
+    vstrTRecord := vstrTRecord +
+                   Copy(gvstrFAVChannelDataArray[vbytRecord, gcbytRXFrequencyField], 3, 3) +
+                   '.' +
+                   Copy(gvstrFAVChannelDataArray[vbytRecord, gcbytRXFrequencyField], 6, 3) +
+                   ','
+  else
+    vstrTRecord := vstrTRecord + '' + ',';
+
+  // Step
+  If Length(gvstrFAVChannelDataArray[vbytRecord, gcbytStepField]) = 0 then
+    vstrTRecord := vstrTRecord + '' + ','
+  else
+    vstrTRecord := vstrTRecord +
+                 gvstrStepArray[StrToInt(gvstrFAVChannelDataArray[vbytRecord,
+                 gcbytStepField])] + ',';
+
+  // Shift
+  If Length(gvstrFAVChannelDataArray[vbytRecord, gcbytShiftField]) = 0 then
+    vstrTRecord := vstrTRecord + '' + ','
+  else
+    case gvstrFAVChannelDataArray[vbytRecord, gcbytShiftField] of
+      gcstrShiftSimplex :
+             vstrTRecord := vstrTRecord + gcstrTMV7ShiftSimplex + ',';
+      gcstrShiftPlus :
+             vstrTRecord := vstrTRecord + gcstrTMV7ShiftPlus + ',';
+      gcstrShiftMinus :
+             vstrTRecord := vstrTRecord + gcstrTMV7ShiftMinus + ',';
+    end;// case gvstrFAVChannelDataArray[vbytRecord, gcbytShiftField]
+
+  // Reverse
+  If Length(gvstrFAVChannelDataArray[vbytRecord, gcbytReverseField]) = 0 then
+    vstrTRecord := vstrTRecord + '' + ','
+  else
+    if gvstrFAVChannelDataArray[vbytRecord, gcbytReverseField] = gcstrOff then
+        vstrTRecord := vstrTRecord + gcstrTMV7Off + ','
+    else
+      vstrTRecord := vstrTRecord + gcstrTMV7On + ',';
+
+  //  TONE - CTCSS
+  // This is sort of comlicated. We have three radio boxes which give us the correct
+  // status of the TMV7 Tone functions as well as a list of tones in the combo box
+  //
+  // First we determine the Tone Function Status
+  If (Length(gvstrFAVChannelDataArray[vbytRecord, gcbytToneField]) = 0) and
+     (Length(gvstrFAVChannelDataArray[vbytRecord, gcbytCTCSSField]) = 0)
+  then
+  begin
+    // There is no Tone Function selected so we null out the Status Field
+    vstrTRecord := vstrTRecord + '' + ',';
+    // and the Tone Frequency field
+    vstrTRecord := vstrTRecord + '' + ',';
+  end
+  else
+  begin
+    // We have a Tone Function selected so we determine both the Function as well
+    // as the Tone Freq
+    if  ((gvstrFAVChannelDataArray[vbytRecord, gcbytToneField]) = gcstrOff) and
+        ((gvstrFAVChannelDataArray[vbytRecord, gcbytCTCSSField]) = gcstrOff) then
+    begin
+      // Both Tone Functions are turned off
+      vstrTRecord := vstrTRecord + gcstrTMV7None + ',';
+      vstrTRecord := vstrTRecord + '' + ',';
+    end
+    else if ((gvstrFAVChannelDataArray[vbytRecord, gcbytToneField]) = gcstrOn) then
+    begin
+      // The Tone Function is turned on
+      vstrTRecord := vstrTRecord + gcstrTMV7Tone + ',';
+      vstrTRecord := vstrTRecord +
+           GetToneFrequencyFromToneNr(StrToInt(gvstrFAVChannelDataArray[vbytRecord,
+           gcbytToneNrField]))+ ',';
+    end
+    else
+    begin
+      // The CTCSS Function is tuirned on
+      vstrTRecord := vstrTRecord + gcstrTMV7CTCSS + ',';
+      vstrTRecord := vstrTRecord +
+           GetToneFrequencyFromToneNr(StrToInt(gvstrFAVChannelDataArray[vbytRecord,
+           gcbytCTCSSNrField])) + ',';
+    end;// if  ((gvstrFAVChannelDataArray[vbytRecord, gcbytToneField])
+
+  end;// If (Length(gvstrFAVChannelDataArray[vbytRecord, gcbytToneField]) = 0)
+
+  // DTSS Function and Code
+  If Length(gvstrFAVChannelDataArray[vbytRecord, gcbytDTSSField]) = 0 then
+    vstrTRecord := vstrTRecord + '' + ',' + '' + ','
+  else
+    if gvstrFAVChannelDataArray[vbytRecord, gcbytDTSSField] = gcstrOff then
+    begin
+        vstrTRecord := vstrTRecord + gcstrTMV7Off + ',';
+        vstrTRecord := vstrTRecord + '' + ',';
+    end
+    else
+    begin
+      vstrTRecord := vstrTRecord + gcstrTMV7On + ',';
+      vstrTRecord := vstrTRecord + gvstrFAVChannelDataArray[vbytRecord,
+      gcbytDTSSCodeField] + ','
+    end;// if gvstrFAVChannelDataArray[vbytRecord, gcbytDTSSField]
+
+  // Shift Offset
+  If Length(gvstrFAVChannelDataArray[vbytRecord, gcbytShiftOffsetField]) = 0 then
+    vstrTRecord := vstrTRecord + '' + ','
+  else
+    vstrTRecord := vstrTRecord +
+    Copy(gvstrFAVChannelDataArray[vbytRecord, gcbytShiftOffsetField], 2, 2) +
+    '.' +
+    Copy(gvstrFAVChannelDataArray[vbytRecord, gcbytShiftOffsetField], 4, 2) + ',';
+
+  // Scan
+  If Length(gvstrFAVChannelDataArray[vbytRecord, gcbytScanField]) = 0 then
+    vstrTRecord := vstrTRecord + '' + ','
+  else
+    if gvstrFAVChannelDataArray[vbytRecord, gcbytScanField] = gcstrOff then
+        vstrTRecord := vstrTRecord + gcstrTMV7Off + ','
+    else
+      vstrTRecord := vstrTRecord + gcstrTMV7On + ',';
+
+  // RF Power
+  If Length(gvstrFAVChannelDataArray[vbytRecord, gcbytRFPowerField]) = 0 then
+    vstrTRecord := vstrTRecord + '' + ','
+  else
+    case gvstrFAVChannelDataArray[vbytRecord, gcbytRFPowerField] of
+      gcstrRFPowerLow :
+        vstrTRecord := vstrTRecord + gcstrTMV7RFPowerLow + ',';
+      gcstrRFPowerMedium :
+        vstrTRecord := vstrTRecord + gcstrTMV7RFPowerMedium + ',';
+      gcstrRFPowerHigh :
+        vstrTRecord := vstrTRecord + gcstrTMV7RFPowerHigh + ',';
+    end;// case gvstrFAVChannelDataArray[vbytRecord, gcbytRFPowerField]
+
+  // Button Name
+  If Length(gvstrFAVChannelDataArray[vbytRecord, gcbytChannelNameField]) = 0 then
+    vstrTRecord := vstrTRecord + '' + ','
+  else
+    vstrTRecord := vstrTRecord + gvstrFAVChannelDataArray[vbytRecord,
+                   gcbytChannelNameField] + ',';
+
+  // Comments
+  If Length(gvstrFAVChannelDataArray[vbytRecord, gcbytCommentsField]) = 0 then
+    vstrTRecord := vstrTRecord + ''
+  else
+    vstrTRecord := vstrTRecord + gvstrFAVChannelDataArray[vbytRecord, gcbytCommentsField];
+
+  Result := vstrTRecord;
+
+end;// function MakeFAVRecord
+
+//========================================================================================
+procedure ParseFAVRecord(vbytRecNr : Byte; vstrRecord : string);
+
+var
+  vbytCommaPos : Byte;
+  vstrTStr : string;
+  vbytTbyt : Byte;
+  vstrTToneNr : string;
+
+begin
+
+  // Bypass the Record Nr
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // VFO
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  case  vstrTstr of
+    '' :     gvstrFAVChannelDataArray[vbytRecNr, gcbytVFOField] := '';
+    gcstrTMV7VFO_VHF : gvstrFAVChannelDataArray[vbytRecNr, gcbytVFOField] := gcstrVHFVFO;
+    else
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytVFOField] :=gcstrUHFVFO;
+  end;// case of vstrTstr
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // RX Frequency
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  if Length(vstrTStr) > 0 then
+    vstrTStr := '00' + Copy(vstrRecord, 1, 3) + Copy(vstrRecord, 5, 3) + '000';
+  gvstrFAVChannelDataArray[vbytRecNr, gcbytRXFrequencyField] := vstrTStr;
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // Step Size
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  if Length(vstrTStr) > 0 then
+  begin
+    // We look for a decimal to determine if we have to conver to Real
+    if Pos('.', vstrTStr) > 0 then
+      vbytTByt := GetStepIndex(StrToFloat(vstrTStr))
+    else
+      vbytTByt := GetStepIndex(StrToFloat(vstrTStr + '.0'));
+    gvstrFAVChannelDataArray[vbytRecNr, gcbytStepField] := IntToStr(vbytTByt);
+  end
+  else
+    gvstrFAVChannelDataArray[vbytRecNr, gcbytStepField] := '';
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // Shift
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  case vstrTStr of
+    '' : gvstrFAVChannelDataArray[vbytRecNr, gcbytShiftField] := '';
+    gcstrTMV7ShiftSimplex :
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytShiftField] := gcstrShiftSimplex;
+    gcstrTMV7ShiftPlus :
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytShiftField] := gcstrShiftPlus;
+    gcstrTMV7ShiftMinus :
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytShiftField] := gcstrShiftMinus;
+  end;// case vstrTStr of
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // Reverse
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  case vstrTStr of
+    '' : gvstrFAVChannelDataArray[vbytRecNr, gcbytReverseField] := '';
+    gcstrTMV7Off : gvstrFAVChannelDataArray[vbytRecNr, gcbytReverseField] := gcstrOff;
+    else
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytReverseField] := gcstrOn;
+  end;// case vstrTStr of
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // Tone Function - This takes care of both Tone and CTCSS On/Off fields
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  case vstrTStr of
+    '' : begin
+           gvstrFAVChannelDataArray[vbytRecNr, gcbytToneField] := '';
+           gvstrFAVChannelDataArray[vbytRecNr, gcbytCTCSSField] := '';
+         end;// '', cstrNone
+    gcstrTMV7None : begin
+           gvstrFAVChannelDataArray[vbytRecNr, gcbytToneField] := gcstrOff;
+           gvstrFAVChannelDataArray[vbytRecNr, gcbytCTCSSField] := gcstrOff;
+         end;// '', cstrNone
+    gcstrTMV7Tone : begin
+           gvstrFAVChannelDataArray[vbytRecNr, gcbytToneField] := gcstrOn;
+           gvstrFAVChannelDataArray[vbytRecNr, gcbytCTCSSField] := gcstrOff;
+         end;// cstrTone
+    else
+      begin
+        gvstrFAVChannelDataArray[vbytRecNr, gcbytToneField] := gcstrOff;
+        gvstrFAVChannelDataArray[vbytRecNr, gcbytCTCSSField] := gcstrOn;
+      end;
+  end;// case vstrTStr of
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // Tone Frequency - This takes care of both Tone and CTCSS Frequency fields
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  if Length(vstrTStr) > 0 then
+  begin
+    // There is a Frequency in the record. That means that either Tone or CTCSS have
+    // been selected. vstrTStr contains the Tone Frequency as a string
+    if gvstrFAVChannelDataArray[vbytRecNr, gcbytToneField] = gcstrOn then
+    begin
+      // Tone has been selected so we have to populate the Tone Nr field and Default the
+      // CTCSS Nr field
+      vbytTByt := GetToneNrFromFrequency(vstrTStr);
+      if vbytTByt < 10 then
+        vstrTToneNr := '0' + IntToStr(vbytTByt)
+      else
+        vstrTToneNr := IntToStr(vbytTByt);
+      if Length(vstrTToneNr) = 1 then
+        vstrTToneNr := '0' + vstrTToneNr;
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytToneNrField] := vstrTToneNr;
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytCTCSSNrField] := '01';
+
+    end
+    else
+    begin
+      // CTCSS has been selected so we have to populate the CTCSS Nr field and Default the
+      // Tone Nr field
+      vbytTByt := GetToneNrFromFrequency(vstrTStr);
+      vstrTToneNr := IntToStr(vbytTByt);
+      if Length(vstrTToneNr) = 1 then
+        vstrTToneNr := '0' + vstrTToneNr;
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytCTCSSNrField] := vstrTToneNr;
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytToneNrField] := '01';
+    end;//éé if gvstrFAVChannelDataArray[vbytRecNr, gcbytToneField] = gcstrOn
+
+  end
+  else
+  begin
+    // There is no Tone Frequency in the record so we clear the Tone Nr fields
+    gvstrFAVChannelDataArray[vbytRecNr, gcbytToneNrField] := '01';
+    gvstrFAVChannelDataArray[vbytRecNr, gcbytCTCSSNrField] := '01';
+  end;//  if Length(vstrTStr) > 0
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // DTSS On/Off
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  case vstrTStr of
+    '' : gvstrFAVChannelDataArray[vbytRecNr, gcbytDTSSField] := '';
+    gcstrTMV7Off : gvstrFAVChannelDataArray[vbytRecNr, gcbytDTSSField] := gcstrOff;
+    else
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytDTSSField] := gcstrOn;
+  end;// case vstrTStr of
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // DTSS Code
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  case vstrTStr of
+    '' : gvstrFAVChannelDataArray[vbytRecNr, gcbytDTSSCodeField] := '000';
+    else
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytDTSSCodeField] := vstrTStr;
+  end;// case vstrTStr of
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+    // Shift Offset
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  case vstrTStr of
+    '' : gvstrFAVChannelDataArray[vbytRecNr, gcbytShiftOffsetField] := '';
+    else
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytShiftOffsetField] := '0' +
+          Copy(vstrTStr, 1, 2) + Copy(vstrTStr, 4, 2) + '0000';
+  end;// case vstrTStr of
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // Scan On/Off
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  case vstrTStr of
+    '' : gvstrFAVChannelDataArray[vbytRecNr, gcbytScanField] := '';
+    gcstrTMV7Off : gvstrFAVChannelDataArray[vbytRecNr, gcbytScanField] := gcstrOff;
+    else
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytScanField] := gcstrOn;
+  end;// case vstrTStr of
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // RF Power
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  case vstrTStr of
+    '' : gvstrFAVChannelDataArray[vbytRecNr, gcbytRFPowerField] := '';
+    gcstrTMV7RFPowerLow :
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytRFPowerField] := gcstrRFPowerLow;
+    gcstrTMV7RFPowerMedium :
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytRFPowerField] := gcstrRFPowerMedium;
+    gcstrTMV7RFPowerHigh :
+      gvstrFAVChannelDataArray[vbytRecNr, gcbytRFPowerField] := gcstrRFPowerHigh;
+  end;// case vstrTStr of
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // Channel Name
+  vbytCommaPos := Pos(',', vstrRecord );
+  vstrTStr := Copy(vstrRecord, 1, vbytCommaPos-1);
+  gvstrFAVChannelDataArray[vbytRecNr, gcbytChannelNameField] := vstrTStr;
+  vstrRecord := Copy(vstrRecord, vbytCommaPos+1, Length(vstrRecord));
+
+  // Comments
+  gvstrFAVChannelDataArray[vbytRecNr, gcbytCommentsField] := vstrRecord;
+
+end;// procedure ParseFAVRecord;
+
+//========================================================================================
+end.// unit TMVFiles_FAV;
+

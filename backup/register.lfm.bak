@@ -1,0 +1,124 @@
+object dlgRegister: TdlgRegister
+  Left = 362
+  Height = 215
+  Top = 182
+  Width = 320
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'Registration'
+  ClientHeight = 215
+  ClientWidth = 320
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.0.14.0'
+  object edtName: TEdit
+    Left = 72
+    Height = 21
+    Top = 48
+    Width = 179
+    Alignment = taCenter
+    AutoSize = False
+    OnKeyPress = edtNameKeyPress
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+  end
+  object edtCallsign: TEdit
+    Left = 125
+    Height = 21
+    Top = 88
+    Width = 72
+    Alignment = taCenter
+    AutoSize = False
+    OnKeyPress = edtCallsignKeyPress
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+  end
+  object edtRegKey: TEdit
+    Left = 129
+    Height = 21
+    Top = 128
+    Width = 64
+    Alignment = taCenter
+    AutoSize = False
+    OnKeyPress = edtRegKeyKeyPress
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+  end
+  object Label1: TLabel
+    Left = 64
+    Height = 31
+    Top = 8
+    Width = 194
+    Alignment = taCenter
+    Caption = 'Enter the name and optional callsign'#13#10' used for program registration'
+    ParentColor = False
+  end
+  object bbtOk: TBitBtn
+    Left = 232
+    Height = 30
+    Hint = 'Hint'
+    Top = 168
+    Width = 75
+    Default = True
+    DefaultCaption = True
+    Kind = bkOK
+    ModalResult = 1
+    OnClick = bbtOkClick
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+  end
+  object bbtCancel: TBitBtn
+    Left = 144
+    Height = 30
+    Top = 168
+    Width = 75
+    Cancel = True
+    Caption = '&Cancel'
+    Kind = bkCancel
+    ModalResult = 2
+    OnClick = bbtCancelClick
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 4
+  end
+  object bbtHelp: TBitBtn
+    Left = 16
+    Height = 30
+    Top = 168
+    Width = 75
+    DefaultCaption = True
+    Enabled = False
+    Kind = bkHelp
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 5
+  end
+  object Label2: TLabel
+    Left = 72
+    Height = 16
+    Top = 91
+    Width = 52
+    Caption = 'Callsign : '
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 31
+    Height = 16
+    Top = 51
+    Width = 42
+    Caption = 'Name : '
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 40
+    Height = 16
+    Top = 131
+    Width = 95
+    Caption = 'Registration Key : '
+    ParentColor = False
+  end
+end

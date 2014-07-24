@@ -1,0 +1,72 @@
+[OPTIONS]
+Binary index=Yes
+Binary TOC=Yes
+Create CHI file=Yes
+Compiled file=C:\Users\Hew\Programming Projects\TMV7A_WC\Docs\Help File\TMV7A.chm
+Default Window=defaultmain
+Display compile progress=Yes
+Error Log File=C:\Users\Hew\Programming Projects\TMV7A_WC\Docs\Help File\TMV7A.log
+Default topic=introduction.htm
+Index file=C:\Users\Hew\Programming Projects\TMV7A_WC\Docs\Help File\TMV7A.hhk
+Contents file=C:\Users\Hew\Programming Projects\TMV7A_WC\Docs\Help File\TMV7A.hhc
+Full-text search=Yes
+Language=0x409 English (United States)
+Title=TMV7A.EXE
+
+[WINDOWS]
+defaultmain="TMV7.EXE","C:\Users\Hew\Programming Projects\TMV7A_WC\Docs\Help File\TMV7A.hhc","C:\Users\Hew\Programming Projects\TMV7A_WC\Docs\Help File\TMV7A.hhk","introduction.htm",,,,,,0x22520,200,0x300C,[198,41,909,529],,,,,0,,0
+
+[FILES]
+introduction.htm
+general features.htm
+how to use help.htm
+version history.htm
+system requirements.htm
+uninstall procedures.htm
+main form.htm
+data entry form.htm
+memory form.htm
+nag screen.htm
+about box.htm
+registration dialogue.htm
+maintaining tmv7 data.htm
+abbreviations.htm
+glossary.htm
+installation and setup.htm
+
+[ALIAS]
+INTRODUCTION_IDH_TOP2=introduction.htm
+GENERAL_FEATURES_IDH_TOP4=general features.htm
+HOW_TO_USE_HELP_IDH_TOP6=how to use help.htm
+VERSION_HISTORY_IDH_TOP8=version history.htm
+SYSTEM_REQUIREMENTS_IDH_TOP10=system requirements.htm
+UNINSTALL_PROCEDURES_IDH_TOP14=uninstall procedures.htm
+MAIN_FORM_IDH_TOP16=main form.htm
+DATA_ENTRY_FORM_IDH_TOP18=data entry form.htm
+MEMORY_FORM_IDH_TOP20=memory form.htm
+NAG_SCREEN_IDH_TOP22=nag screen.htm
+ABOUT_BOX_IDH_TOP24=about box.htm
+REGISTRATION_DIALOGUE_IDH_TOP26=registration dialogue.htm
+MAINTAINING_TMV__DATA_IDH_TOP28=maintaining tmv7 data.htm
+ABBREVIATIONS_IDH_TOP30=abbreviations.htm
+GLOSSARY_IDH_TOP32=glossary.htm
+INSTALLATION_AND_SETUP_IDH_TOP34=installation and setup.htm
+
+[MAP]
+#define INTRODUCTION_IDH_TOP2 1
+#define GENERAL_FEATURES_IDH_TOP4 2
+#define HOW_TO_USE_HELP_IDH_TOP6 3
+#define VERSION_HISTORY_IDH_TOP8 4
+#define SYSTEM_REQUIREMENTS_IDH_TOP10 5
+#define UNINSTALL_PROCEDURES_IDH_TOP14 7
+#define MAIN_FORM_IDH_TOP16 8
+#define DATA_ENTRY_FORM_IDH_TOP18 9
+#define MEMORY_FORM_IDH_TOP20 10
+#define NAG_SCREEN_IDH_TOP22 11
+#define ABOUT_BOX_IDH_TOP24 12
+#define REGISTRATION_DIALOGUE_IDH_TOP26 13
+#define MAINTAINING_TMV__DATA_IDH_TOP28 14
+#define ABBREVIATIONS_IDH_TOP30 15
+#define GLOSSARY_IDH_TOP32 16
+#define INSTALLATION_AND_SETUP_IDH_TOP34 17
+

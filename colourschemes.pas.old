@@ -1,0 +1,35 @@
+unit ColourSchemes;
+
+{$mode objfpc}{$H+}
+
+//========================================================================================
+//
+//  ColourSchemes.pas
+//
+//  Calls:
+//
+//  Called By:
+//
+//  Ver: 1.0.0
+//
+//  Date: 23 May 2013
+//
+//========================================================================================
+
+interface
+
+uses
+  Classes, SysUtils;
+
+procedure SetColourScheme;
+
+implementation
+
+procedure SetColourScheme;
+begin
+
+
+end;
+
+end.// unit ColourSchemes;
+

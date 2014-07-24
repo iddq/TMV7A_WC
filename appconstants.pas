@@ -1,0 +1,288 @@
+unit AppConstants;
+
+{$mode objfpc}{$H+}
+
+//========================================================================================
+//
+//  Constants.pas
+//
+//  Calls:
+//
+//  Called By: AGCommand : SetVHF_AGValue
+//                         SetUHF_AGValue
+//             BCCommand : TogglePTTBand
+//             BUFCommand : BUFResponseHandler
+//             BYCommand : BYResponseHandler
+//             DataEntry : TfrmDataEntry.FormActivate
+//                         TfrmDataEntry.bbtSaveClick
+//             DataEntry_FAV : DataEntry_FAV_Init
+//             DataEntry_UHFMEM : DataEntry_UHFMEM_Init
+//             DataEntry_VHFMEM : DataEntry_VHFMEM_Init
+//             Fav : SetFAVChannel
+//             Final : Finalize
+//             INIStuff : ReadINIFile
+//             Init : Initialize
+//             LCDDisplay : DisplayBCStatus
+//             Main : TfrmMain.mnuFileNewClick
+//                    TfrmMain.mnuFileOpenClick
+//                    TfrmMain.mnuFileSaveAsClick
+//             Mem : TfrmMEM.Setup
+//             Mem__VHF : LoadVHFStringGrid
+//                        SetVHFChannel
+//             Mem__UHF : LoadUHFStringGrid
+//                        SetUHFChannel
+//             Mute : ToggleMute
+//             NagScreen : TdlgNagScreen.bbtHelpClick
+//             PCCommand : ToggleRFPower
+//             PSCommand : PSResponseHandler
+//                         TogglePowerOnOff
+//             ReportTMV7File : TfrmReportTMV7File.frUserDataset1First
+//             Reverse : ToggleReverse
+//             RXCommand : RXResponseHandler
+//             SerialStuff : OpenPort
+//             SMCommand : SetVHF_SMValue
+//                         SetUHF_SMValue
+//                          SMResponseHandler
+//             SplashAbout : TdlgSplashAbout.ShowAbout
+//                           TdlgSplashAbout.ShowSplash
+//             StatusBar : DisplayCOMPortStatus
+//             TMVFiles : MakeFAVRecord
+//                        MakeUHFRecord
+//                        NewTMVFile
+//                        OpenTMVFile
+//                        ParseFAVRecord
+//                        WriteTMVFile
+//             TMVFiles_FAV : ParseFAVRecord
+//                            MakeFAVRecord
+//             TMVFiles_UHF : ParseUHFRecord
+//                            MakeUHFRecord
+//             TMVFiles_VHF : ParseVHFRecord
+//                            MakeVHFRecord
+//             TXCommand : TXResponseHandler
+//             Utilities : GetToneNrFromFrequency
+//                         ValidUHFFrequency
+//                         ValidVHFFrequency
+//             Variables
+//
+//  Ver: 1.0.0
+//
+//  Date: 7 Apr 2014
+//
+//========================================================================================
+
+interface
+
+uses
+  Classes, SysUtils;
+
+const
+
+  //======================================================================================
+  //                             APPLICATIONM CONSATNTS
+  //======================================================================================
+
+  gcstrAppDate: string = '24 Jul 2014';
+  gcstrAppName: string = 'TMV7A';
+  gcstrAppVersion: string = '1.0.0';
+
+  gcstrNone = '0';
+
+  gcstrOff = '0';
+  gcstrOn = '1';
+
+  gcblnOn = True;
+  gcblnOff = False;
+
+  gcstrUHF = '1';
+  gcstrVHF = '0';
+  gcstrDTMF = '2';
+
+  gcstrVHFStep = '0';
+  gcstrUHFStep = '6';
+
+  gcstrRFPowerLow = '2';
+  gcstrRFPowerMedium = '1';
+  gcstrRFPowerHigh = '0';
+
+  gcstrUHFVFO = gcstrUHF;
+  gcstrVHFVFO = gcstrVHF;
+
+  gcstrShiftSimplex = '0';
+  gcstrShiftPlus = '1';
+  gcstrShiftMinus = '2';
+
+  gcstrVHFShiftOffset = '00.60';
+  gcstrUHFShiftOffset = '05.00';
+  gcstrNoShiftOffset = '00.00';
+
+  gcbytMaxToneIndex = 37;
+
+  gcsngMinUHFFrequency = 410.000;
+  gcsngMaxUHFFrequency = 469.999;
+  gcsngMinVHFFrequency = 118.000;
+  gcsngMaxVHFFrequency = 173.999;
+
+  //======================================================================================
+  //                     ARRAY CONSTANTS
+  //======================================================================================
+
+  // Channel Array Constants
+  gcbytArrayStartValue = 1;
+  gcbytMaxChannelFieldCount = 16 {17};
+  gcbytMaxDTMFFieldCount = 1 {2};
+  gcbytMaxFAVChannels = 12;
+  gcbytMaxVHFChannels = 99;
+  gcbytMaxUHFChannels = 99;
+  gcbytMaxDTMFCodes = 10;
+
+  gcbytVFOField = 1;
+  gcbytRXFrequencyField = 2;
+  gcbytStepField = 3;
+  gcbytShiftField = 4;
+  gcbytReverseField = 5;
+  gcbytToneField = 6;
+  gcbytCTCSSField = 7;
+  gcbytDTSSField = 8;
+  gcbytToneNrField = 9;
+  gcbytDTSSCodeField = 10;
+  gcbytCTCSSNrField = 11;
+  gcbytShiftOffsetField = 12;
+  gcbytScanField = 13;
+  gcbytRFPowerField = 14;
+  gcbytChannelNameField = 15;
+  gcbytCommentsField = 16;
+
+  // DTMF Array Constants
+  gcbytMaxDTMFEntries = 10;
+  gcbytMaxDTMFEFieldCount = 1;
+
+  //======================================================================================
+  //          COLOUR SCHEMES
+  //======================================================================================
+  gcstrDefaultColourScheme = '1';
+
+  //======================================================================================
+  //                     DEFAULT BUFFER SETTINGS
+  //======================================================================================
+
+  // UHF Default Settings
+  gcstrUHFDefDataSource = 'VFO';
+  gcstrDefUHFRXFrequency = '00446000000'; // 446.000 MHz
+  gcstrDefUHFStep = '0';
+  gcstrDefUHFShift = gcstrShiftSimplex;
+  gcstrDefUHFReverse = gcstrOff;
+  gcstrDefUHFTone = gcstrOff;
+  gcstrDefUHFCTCSS = gcstrOff;
+  gcstrDefUHFDTSS = gcstrOff;
+  gcstrDefUHFToneNr = '01';
+  gcstrDefUHFDTSSCode = '000';
+  gcstrDefUHFCTCSSNr = '01';
+  gcstrDefUHFOffset = '000000000';
+  gcstrDefUHFScan = gcstrOff;
+  gcstrDefUHFSplitFrequency = '00446000000'; // 446.000 MHz
+  gcstrDefUHFSplitStep = '0';
+  gcstrDefUHFRFPower = gcstrRFPowerHigh;
+  gcstrDefUHFChannelName = 'Simplex';
+  gcstrDefUHFChannelComments = 'UHF Simplex';
+  gcstrDefUHFAudioLevel = '10';
+  gcstrDefUHFSquelchLevel = '04';
+  gcstrDefUHFReverseState = gcstrOff;
+
+  // VHF Default Settings
+  gcstrVHFDefDataSource = 'VFO';
+  gcstrDefVHFRXFrequency = '00146520000'; // 146.520 MHz
+  gcstrDefVHFStep = '0';
+  gcstrDefVHFShift = gcstrShiftSimplex;
+  gcstrDefVHFReverse = gcstrOff;
+  gcstrDefVHFTone = gcstrOff;
+  gcstrDefVHFCTCSS = gcstrOff;
+  gcstrDefVHFDTSS = gcstrOff;
+  gcstrDefVHFToneNr = '01';
+  gcstrDefVHFDTSSCode = '000';
+  gcstrDefVHFCTCSSNr = '01';
+  gcstrDefVHFOffset = '000000000';
+  gcstrDefVHFScan = gcstrOff;
+  gcstrDefVHFSplitFrequency = '00146520000'; // 146.520 MHz
+  gcstrDefVHFSplitStep = '0';
+  gcstrDefVHFRFPower = gcstrRFPowerHigh;
+  gcstrDefVHFChannelName = 'Simplex';
+  gcstrDefVHFChannelCOmments = 'VHF Simplex';
+  gcstrDefVHFAudioLevel = '10';
+  gcstrDefVHFSquelchLevel = '04';
+  gcstrDefVHFReverseState = gcstrOff;
+
+  //======================================================================================
+  //     EDITBOX.TEXT SIZES
+  //======================================================================================
+
+  gcbytMaxCommentsLength = 30;
+  gcbytMinCommentsLength = 0;
+  gcbytMaxChannelNameLength = 15;
+  gcbytMinChannelNameLength = 5;
+  gcbytMaxDTSSCodeLength = 3;
+  gcbytMinDTSSCodeLength = 3;
+  gcbytMaxFrequencyLength = 7;
+  gcbytMinFrequencyLength = 7;
+
+  //======================================================================================
+  //                  FILE CONSTANTS
+  //======================================================================================
+
+  // TMV7 File Constants
+  gcstrTMV7FileDir = 'TMVFiles';
+  gcstrTMV7FileExt = 'tmv';
+  gcstrTMV7VFO_UHF = 'UHF';
+  gcstrTMV7VFO_VHF = 'VHF';
+  gcstrTMV7ShiftSimplex = 'S';
+  gcstrTMV7ShiftPlus = 'P';
+  gcstrTMV7ShiftMinus = 'M';
+  gcstrTMV7On = 'On';
+  gcstrTMV7Off = 'Off';
+  gcstrTMV7RFPowerLow = 'L';
+  gcstrTMV7RFPowerMedium = 'M';
+  gcstrTMV7RFPowerHigh = 'H';
+  gcstrTMV7None = 'N';
+  gcstrTMV7Tone = 'T';
+  gcstrTMV7CTCSS = 'C';
+  gcstrTMV7UHFHeader = '[UHF MEMORY]';
+  gcstrTMV7VHFHeader = '[VHF MEMORY]';
+  gcstrTMV7FAVHeader = '[FAV MEMORY]';
+  gcstrTMV7DTMFHeader = '[DTMF MEMORY]';
+
+  //======================================================================================
+  //              LCD CONSTANTS
+  //======================================================================================
+
+  // LCD Display Constants
+  gcstrDefPTTBand = 0;
+
+  //======================================================================================
+  //          MEM CONSTANTS
+  //======================================================================================
+  gcbytChMemNrCol = 0;
+  gcbytNameCol = 1;
+  gcbytRXFreqCol = 2;
+  gcbytShiftCol = 3;
+  gcbytOffsetCol = 4;
+  gcbytToneCTCSSCol = 5;
+  gcbytToneCTCSSFreqCol = 6;
+  gcbytRFPowerCol = 7;
+  gcbytDTSSCol = 8;
+  gcbytDTSSCodeCol = 9;
+  gcbytReverseCol = 10;
+  gcbytScanCol = 11;
+  gcbytStepCol = 12;
+  gcbytCommentCol = 13;
+
+  //======================================================================================
+  //                  SERIAL PORT CONSTANTS
+  //======================================================================================
+
+  // Serial Port Constants
+  gcstrDefCOMPort = '';
+  gcstrAutoOpenCOMPort = False;
+
+implementation
+
+end.// unit AppConstants
+

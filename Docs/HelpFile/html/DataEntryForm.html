@@ -1,0 +1,244 @@
+﻿<html>
+	
+<head>
+	<title>Data Entry Form</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.1.0.219">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "TMV7A.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("DataEntryForm");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Data Entry Form</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Forms.html">Forms</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Forms.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="MainForm.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="MemoryForm.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<h3 class="rvps6"><a name="1.0 General"></a>
+<span class="rvts0"><span class="rvts17">1.0 General</span></span></h3>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps4"><img alt="" style="padding : 1px;" src="lib/DEF_1.jpg"/></p>
+<p class="rvps4"><span class="rvts8"><br/></span></p>
+<p class="rvps4"><span class="rvts8">DEF_1</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps3"><span class="rvts8">The Data Entry Form is a common form used to configure all channel data regardless of source (VFO or Memory) or band (</span><a class="rvts30" href="Abbreviations.html#VHF">VHF</a><span class="rvts8"> or </span><a class="rvts30" href="Abbreviations.html#UHF">UHF</a><span class="rvts8">) and consists of a Title Bar, Main Data Entry Area and four Command Buttons. When the Data Entry form is initially displayed, the data from the channel last selected for the data source will be used as default data to populate the Data Entry form fields.</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<h3 class="rvps6"><a name="2.0 TITLE BAR"></a>
+<span class="rvts0"><span class="rvts17">2.0 TITLE BAR</span></span></h3>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps3"><span class="rvts8">The Title Bar displays the data source or Channel Type (VFO, UHF Memory, VHF Memory or Favourite Button).</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<h3 class="rvps6"><a name="3.0 MAIN DATA ENTRY AREA"></a>
+<span class="rvts0"><span class="rvts17">3.0 MAIN DATA ENTRY AREA</span></span></h3>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps3"><span class="rvts8">The Main Data Entry Area consists of a small data entry area and five functional Data Entry Panels that contain standard Windows Textboxes, Drop-Down Lists, Radio Buttons and Checkboxes. These controls are enabled and disabled depending on the data being entered at any specific time. Within each panel, only one of the set of Radio Buttons available can be selected. There are three Textboxes that are read only and cannot be changed (Source, TX Frequency and Offset). These boxes contain static or calculated data. A fourth Textbox (</span><a class="rvts30" href="Abbreviations.html#DTSS">DTSS</a><span class="rvts8"> Code) is only enabled if the </span><a class="rvts30" href="Abbreviations.html">DTSS</a><span class="rvts8"> Checkbox has been selected.</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps3"><span class="rvts8">It is imprtant to understand that the Band, Frequency and Shift panels are all related and work together. The Band radio buttons define the frequency limits for entry and the Shift Offset value. The Shift Offset value is used in the calculatiuon of the Transmit Frequency.</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps3"><span class="rvts8">Extensive error checking and data validation are done on the data entered into this form. When the Save button is selected, all data is checked to ensure that the frequency entered is valid for the band selected, the </span><a class="rvts30" href="Abbreviations.html#DTSS">DTSS</a><span class="rvts8"> Code if entered) is three digits and, a valid Channel Name is entered. The data entered into each text box is validated on entry and only valid digits or alpha-numeric characters are allowed as required. A channel entry will not be saved with invalid data and an error message will be displayed indicating the error.</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<h6 class="rvps9"><a name="3.1 Band Panel"></a>
+<span class="rvts0"><span class="rvts25">3.1 Band Panel</span></span></h6>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps4"><img alt="" style="padding : 1px;" src="lib/DEF_2.jpg"/></p>
+<p class="rvps4"><span class="rvts8">DEF_2</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The Band Panel contains two radio buttons that are used to configure the band to be used for this channel and as a direct result define the frequency limits that are valid for the entry of the Receive Frequency and calculation of the Transmit Frequency as well as the Frequency Offset value to be used (600 </span><a class="rvts30" href="Abbreviations.html#kHz">kHz</a><span class="rvts8"> for </span><a class="rvts30" href="Abbreviations.html#VHF">VHF</a><span class="rvts8"> or 5 </span><a class="rvts30" href="Abbreviations.html">MHz</a><span class="rvts8"> for </span><a class="rvts30" href="Abbreviations.html#UHF">UHF</a><span class="rvts8">). Frequency limits are those limits defined in the Kenwood TMV7A manual and are </span><a class="rvts30" href="Abbreviations.html#VHF">VHF</a><span class="rvts8"> - 118.0 </span><a class="rvts30" href="Abbreviations.html#MHz">MHz</a><span class="rvts8"> to 173.995 </span><a class="rvts30" href="Abbreviations.html#MHz">MHz</a><span class="rvts8"> and </span><a class="rvts30" href="Abbreviations.html#UHF">UHF</a><span class="rvts8"> - 410.0 </span><a class="rvts30" href="Abbreviations.html#MHz">MHz</a><span class="rvts8"> and 469.975 </span><a class="rvts30" href="Abbreviations.html#MHz">MHz</a><span class="rvts8">.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">Only one radio button may be selected.</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<h6 class="rvps9"><a name="3.2 Frequency Panel"></a>
+<span class="rvts0"><span class="rvts25">3.2 Frequency Panel</span></span></h6>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps4"><img alt="" style="padding : 1px;" src="lib/DEF_3.jpg"/></p>
+<p class="rvps4"><span class="rvts8">DEF_3</span></p>
+<p class="rvps4"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The Frequency Panel contains three Textboxes. The user can only enter data into the RX Frequency textbox. the other two textboxes are read-only.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps3"><a name="3.2.1 Source Textbox"></a>
+<span class="rvts15">3.2.1 Source Textbox</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The Source textbox is a read-only textbox that is used by the application to identify both the source or channel type.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">If the source is the VFO the text will display the band and text "VFO" (VHFVFO or UHFVFO) depending on which menu item was selected.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">If the source is one of the Memory dialogue boxes then the text will display the band and channel number (VHF001 or UHF001).</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">If the source is one of the Favourite buttons then the text will display "FAV" and the button number (FAV1).</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps3"><a name="3.2.2 RX Frequency Textbox"></a>
+<span class="rvts15">3.2.2 RX Frequency Textbox</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The RX Frequency textbox will display the current frequency of the source. In the case of a blank (non-configured) Memory channel or Favourite button then it will be blank. This is the textbox used to enter the desired frequency. The data entered in this textbox is validated on entry and must be in the format "nnn.nnn". Only the digits 0 to 9 and the decimal point may be entered and the decimal point may only be in the fourth character position. The frequency must be a full six-digit value. It is important to note that only a valid frequency can be entered depending on the setting of the Band radio buttons (</span><a class="rvts30" href="Abbreviations.html#UHF">UHF</a><span class="rvts8"> or </span><a class="rvts30" href="Abbreviations.html#VHF">VHF</a><span class="rvts8">). Any invalid frequency will result in an error message.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps12"><img alt="" style="padding : 1px;" src="lib/DEF_4.jpg"/></p>
+<p class="rvps12"><span class="rvts8"><br/></span></p>
+<p class="rvps12"><span class="rvts8">DEF_4</span></p>
+<p class="rvps12"><span class="rvts8"><br/></span></p>
+<p class="rvps3"><a name="3.2.3 TX Frequency Textbox"></a>
+<span class="rvts15">3.2.3 TX Frequency Textbox</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The TX Frequency is automatically calculated by the application depending on the band selected and is displayed in this textbox. It is not editable by the user.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<h6 class="rvps9"><a name="3.3 Tones Panel"></a>
+<span class="rvts0"><span class="rvts25">3.3 Tones Panel</span></span></h6>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps4"><img alt="" style="padding : 1px;" src="lib/DEF_5.jpg"/></p>
+<p class="rvps4"><span class="rvts8"><br/></span></p>
+<p class="rvps4"><span class="rvts8">DEF_5</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The Tones panel is used to configure </span><a class="rvts30" href="Abbreviations.html#PL">PL</a><span class="rvts8"> or </span><a class="rvts30" href="Abbreviations.html#CTCSS">CTCSS</a><span class="rvts8"> tone and </span><a class="rvts30" href="Abbreviations.html#DTSS">DTSS</a><span class="rvts8"> Code functionality and consists of three radio buttons and a drop-down list for tones and a checkbox and edit box for </span><a class="rvts30" href="Abbreviations.html#DTSS">DTSS</a><span class="rvts8"> Codes.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><a name="3.3.1 Tone Functionality"></a>
+<span class="rvts15">3.3.1 Tone Functionality</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps8"><span class="rvts8">There are three radio buttons used to define tone functionality. Only one of the buttons may be selected:</span></p>
+<p class="rvps8"><span class="rvts8"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li class="rvps14" style="margin-left: 0px"><span class="rvts15">None</span><span class="rvts8"> - This is the default value and if selected then no tome functionality will be available for this channel entry and the Tone drop-down list will be disabled.</span><br/><span class="rvts8"><br/></span></li>
+<li class="rvps14" style="margin-left: 0px"><span class="rvts15">Tone</span><span class="rvts8"> - If selected, this button will enable </span><a class="rvts30" href="Abbreviations.html#PL">PL</a><span class="rvts8"> Tone functionality for this channel entry. The Tone Frequency drop-down list will be enabled and a tone must be selected from the list. If no tone is selected, an error message will be displayed.</span><br/><span class="rvts8"><br/></span></li>
+<li class="rvps14" style="margin-left: 0px"><span class="rvts15">CTCSS</span><span class="rvts8"> - If selected, this button will enable </span><a class="rvts30" href="Abbreviations.html#CTCSS">CTCSS</a><span class="rvts8"> Tone functionality for this channel entry. The Tone Frequency drop-down list will be enabled and a tone must be selected from the list. If no tome is selected, an error message will be displayed</span></li>
+</ul></ul>
+<p class="rvps14"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><a name="3.3.2 DTSS Code Functionality"></a>
+<span class="rvts15">3.3.2 DTSS Code Functionality</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps8"><a class="rvts30" href="Abbreviations.html#DTSS">DTSS</a><span class="rvts8"> Code functionality is enabled by selecting the </span><a class="rvts30" href="Abbreviations.html#DTSS">DTSS</a><span class="rvts8"> checkbox. If this checkbox is selected, the </span><a class="rvts30" href="Abbreviations.html#DTSS">DTSS</a><span class="rvts8"> Code edit box is enabled and the </span><a class="rvts30" href="Abbreviations.html#DTSS">DTSS</a><span class="rvts8"> default code "000" will be displayed. This default can be changed but the change must be a three-digit code between 000 and 999.</span></p>
+<p class="rvps8"><span class="rvts8"><br/></span></p>
+<h6 class="rvps9"><a name="3.4 Shift Panel"></a>
+<span class="rvts0"><span class="rvts25">3.4 Shift Panel</span></span></h6>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps4"><img alt="" style="padding : 1px;" src="lib/DEF_6.jpg"/></p>
+<p class="rvps4"><span class="rvts8"><br/></span></p>
+<p class="rvps4"><span class="rvts8">DEF_6</span></p>
+<p class="rvps4"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The Shift panel consists of three Shift radio buttons and an offset Textbox and is used to select either Simplex or Repeater operation for the channel entry. The Repeater Offset value is fixed and is a function of the band selected in the Band panel ( 600 </span><a class="rvts30" href="Abbreviations.html#kHz">kHz</a><span class="rvts8"> for </span><a class="rvts30" href="Abbreviations.html#VHF">VHF</a><span class="rvts8"> or 5 </span><a class="rvts30" href="Abbreviations.html#MHz">MHz</a><span class="rvts8"> for </span><a class="rvts30" href="Abbreviations.html#UHF">UHF</a><span class="rvts8">). The offset value is displayed in the Offset textbox automatically.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">Only one of the radio buttons can be selected. </span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li class="rvps14" style="margin-left: 0px"><a name="Simplex Radio Button"></a>
+<span class="rvts15">Simplex Radio Button</span><span class="rvts8"> - No offset is applied.</span></li>
+</ul></ul>
+<p class="rvps14"><span class="rvts8"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li class="rvps14" style="margin-left: 0px"><a name="Plus Radio Button"></a>
+<span class="rvts15">Plus Radio Button</span><span class="rvts8"> - The offset displayed in the offset textbox is applied and the Transmit frequency is shifted up by the offset value.</span></li>
+</ul></ul>
+<p class="rvps14"><span class="rvts8"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li class="rvps14" style="margin-left: 0px"><a name="Minus Radio Button"></a>
+<span class="rvts15">Minus Radio Button</span><span class="rvts8"> - &nbsp;The offset displayed in the offset textbox is applied and the Transmit frequency is shifted down by the offset value.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<h6 class="rvps9"><a name="3.5 RF Power Panel"></a>
+<span class="rvts0"><span class="rvts25">3.5 RF Power Panel</span></span></h6>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps4"><img alt="" style="padding : 1px;" src="lib/DEF_7.jpg"/></p>
+<p class="rvps4"><span class="rvts8">DEF_7</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The RF Power panel conatins three radio buttons that are used to select the default RF power setting for the channel entry. Only on of the three buttons may be selected.</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<h3 class="rvps6"><a name="4.0 COMMAND BUTTONS"></a>
+<span class="rvts0"><span class="rvts17">4.0 COMMAND BUTTONS</span></span></h3>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps3"><span class="rvts8">There are four command buttons at the bottom of the Data Entry form that allow the user to complete the DataEntry process.</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<h3 class="rvps6"><a name="4.1 Cancel Button"></a>
+<span class="rvts0"><span class="rvts17">4.1 Cancel Button</span></span></h3>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The Cancel button is used to cancel the Data Entry process and exit the Data Entry form without changing or saving any channel data. If the Cancel button is selected, a confirmation message is displayed requireing the user to confirm the cancellation with no changes.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps4"><img alt="" style="padding : 1px;" src="lib/DEF_8.jpg"/></p>
+<p class="rvps4"><span class="rvts8"><br/></span></p>
+<p class="rvps4"><span class="rvts8">DEF_8</span></p>
+<p class="rvps4"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">If the user selects the &lt;Yes&gt; button the DataEntry form will be closed. If the user selects &lt;No&gt; the form will remain open and no changes will be made.</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<h3 class="rvps6"><a name="4.2 Reset Button"></a>
+<span class="rvts0"><span class="rvts17">4.2 Reset Button</span></span></h3>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The Reset button is used to cancel any changes made to the data fields will be reset to the initial default data. If the Reset button is selected, a confirmation message is displayed requiring the user to confirm that any changed data will be reset to its original default state.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps12"><img alt="" style="padding : 1px;" src="lib/DEF_9.jpg"/></p>
+<p class="rvps12"><span class="rvts8"><br/></span></p>
+<p class="rvps12"><span class="rvts8">DEF_9</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">If the user selects the &lt;Yes&gt; button any changes made to the data fields will be reset to the initial default data and the form will remain open. If the user selects &lt;No&gt; the form will remain open and no changes will be made.</span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<h3 class="rvps6"><a name="4.3 Clear Button"></a>
+<span class="rvts0"><span class="rvts17">4.3 Clear Button</span></span></h3>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The Clear button is used to Clear all data fields. If the Clear button is selected, a confirmation message is displayed requiring the user to confirm that all data fields will be cleared and previous data will be lost..</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps12"><img alt="" style="padding : 1px;" src="lib/DEF_10.jpg"/></p>
+<p class="rvps12"><span class="rvts8"><br/></span></p>
+<p class="rvps12"><span class="rvts8">DEF_10</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">If the user selects the &lt;Yes&gt; button all data fields will be cleared and the form will remain open. If the user selects &lt;No&gt; the form will remain open and no changes will be made.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<h3 class="rvps6"><a name="4.4 Save Button"></a>
+<span class="rvts0"><span class="rvts17">4.4 Save Button</span></span></h3>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p class="rvps7"><span class="rvts8">The Save button is used to save the channel data and close the form. If the source is VFO, then selecting the Save button will also set the TMV7A to the saved channel.</span></p>
+<p class="rvps7"><span class="rvts8"><br/></span></p>
+<p class="rvps3"><span class="rvts8"><br/></span></p>
+<p></p>
+<p class="rvps2"><span class="rvts6">Created with the Personal Edition of HelpNDoc: </span><a class="rvts7" href="http://www.helpndoc.com/create-epub-ebooks">Generate EPub eBooks with ease</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

@@ -1,0 +1,204 @@
+unit BUFCommand;
+
+{$mode objfpc}{$H+}
+
+//========================================================================================
+//
+//  BUFCommand.pas
+//
+// Description: Description: Reads and Sets the VHF and UHF Buffer data consisting of the
+// following data items separated by commas:
+//
+//           0,00145290000,0,2,0,1,0,0,28,000,19,000600000
+//           1,00443575000,6,1,0,1,0,0,13,000,19,005000000
+//
+//           VFO : [0..1] [VHF..UHF]
+//           Frequency : [nnnnnnnnnnn] 11 characters - Freq in Hz
+//           Step : [n] 1 characters - Frequency Step Size
+//           Shift/Offset : [n] [0..2] - 0=None, 1=Plus (Up), 2=Minus (Down)
+//           Reverse : [n] 0 = OFF 1 = ON
+//           Tone : [n] 0 = OFF 1 = ON
+//           CTCSS : [n] 0 = OFF 1 = ON
+//           DTSS : [n] 0 = OFF 1 = ON
+//           Tone Freq : [nn] Tone Freq Code [01..39]
+//           DTSS Code : [nnn] [000..999]
+//           CTCSS Freq : [nn] Tone Freq Code [01..39]
+//           Offset : [nnnnnnnnn] 9 characters - Repeater Offset in Hz
+//
+//  Calls: AppConstants
+//         AppVariables
+//         LCDDisplay : DisplayVHFRXFrequency
+//                      DisplayUHFRXFrequency
+//                      DisplayUHFShiftStatus
+//                      DisplayVHFShiftStatus
+//                      DisplayUHFReverseStatus
+//                      DisplayVHFReverseStatus
+//                      DisplayUHFCTStatus
+//                      DisplayVHFCTStatus
+//                      DisplayUHFDTSSStatus
+//                      DisplayVHFDTSSStatus
+//                      DisplayUHFRFPowerStatus
+//                      DisplayVHFRFPowerStatus
+//                      DisplayUHFDataSource
+//                      DisplayVHFDataSource
+//                      DisplayUHFChannelNr
+//                      DisplayVHFChannelNr
+//                      DisplayUHFChannelName
+//                      DisplayvHFChannelName
+//                      DisplayCommentStatus
+//         Reverse : ToggleReverse
+//         SerialStuff : SendCommand
+//         Variables
+//
+//  Called By: Fav : SetFAVChannel
+//      Init : Initialize
+//         Mem_VHF : TfrmMEM.bbtSelectClick
+//
+//  Ver: 1.0.0
+//
+//  Date: 11 Dec 2013
+//
+//========================================================================================
+
+interface
+
+uses
+  Classes, Dialogs, SysUtils,
+  // Application Units
+  AppConstants, LCDDisplay, Reverse, SerialStuff, AppVariables;
+
+procedure BUFResponseHandler (vstrKeywordRcvd, vstrParameters : string);
+procedure GetBufferData(vstrBand : string);
+procedure SetBuffer(vstrBand : string);
+
+implementation
+
+//========================================================================================
+
+procedure BUFResponseHandler (vstrKeywordRcvd, vstrParameters : string);
+begin
+
+  // First we determine the Band is (VHF or UHF) and then save the data
+  if Copy(vstrParameters,1,1) = gcstrVHF then
+  begin
+
+    gvstrVHFRXFrequency := Copy(vstrParameters,3,11);
+    gvstrVHFStep := Copy(vstrParameters,15,1);
+    gvstrVHFShift := Copy(vstrParameters,17,1);
+    gvstrVHFReverse := Copy(vstrParameters,19,1);
+    gvstrVHFTone := Copy(vstrParameters,21,1);
+    gvstrVHFCTCSS := Copy(vstrParameters,23,1);
+    gvstrVHFDTSS := Copy(vstrParameters,25,1);
+    gvstrVHFToneNr := Copy(vstrParameters,27,2);
+    gvstrVHFDTSSCode := Copy(vstrParameters,30,3);
+    gvstrVHFCTCSSNr := Copy(vstrParameters,34,2);
+    gvstrVHFOffset := Copy(vstrParameters,37,9);
+
+  end
+  else
+  begin
+
+    gvstrUHFRXFrequency := Copy(vstrParameters,3,11);
+    gvstrUHFStep := Copy(vstrParameters,15,1);
+    gvstrUHFShift := Copy(vstrParameters,17,1);
+    gvstrUHFReverse := Copy(vstrParameters,19,1);
+    gvstrUHFTone := Copy(vstrParameters,21,1);
+    gvstrUHFCTCSS := Copy(vstrParameters,23,1);
+    gvstrUHFDTSS := Copy(vstrParameters,25,1);
+    gvstrUHFToneNr := Copy(vstrParameters,27,2);
+    gvstrUHFDTSSCode := Copy(vstrParameters,30,3);
+    gvstrUHFCTCSSNr := Copy(vstrParameters,34,2);
+    gvstrUHFOffset := Copy(vstrParameters,37,9);
+
+  end;//if Copy(vstrParameters,1,1) = gcstrVHF
+
+  // Now we display the data
+  DisplayUHFRXFrequency;
+  DisplayVHFRXFrequency;
+  DisplayUHFShiftStatus;
+  DisplayVHFShiftStatus;
+  DisplayUHFReverseStatus;
+  DisplayVHFReverseStatus;
+  DisplayUHFCTStatus;
+  DisplayVHFCTStatus;
+  DisplayUHFDTSSStatus;
+  DisplayVHFDTSSStatus;
+  DisplayUHFRFPowerStatus;
+  DisplayVHFRFPowerStatus;
+  DisplayUHFDataSource;
+  DisplayVHFDataSource;
+  DisplayUHFChannelNr;
+  DisplayVHFChannelNr;
+  DisplayUHFChannelName;
+  DisplayVHFChannelName;
+  DisplayCommentStatus;
+
+end;// procedure BUFResponseHandler
+
+//========================================================================================
+
+procedure GetBufferData(vstrBand : string);
+begin
+
+end;// procedure GetBufferData
+
+//========================================================================================
+
+procedure SetBuffer(vstrBand : string);
+
+var
+  vstrCmdStr : string;
+
+begin
+
+  if vstrBand = gcstrVHF then
+  begin
+
+  if gvstrVHFReverseState = gcstrOn then
+       VHFReverseOff;
+
+     vstrCmdStr := vstrCmdStr +
+                   gcstrVHFVFO + ',' +
+                   gvstrVHFRXFrequency + ',' +
+                   gvstrVHFStep + ',' +
+                   gvstrVHFShift + ',' +
+                   gvstrVHFReverse + ',' +
+                   gvstrVHFTone + ',' +
+                   gvstrVHFCTCSS + ',' +
+                   gvstrVHFDTSS + ',' +
+                   gvstrVHFToneNr + ',' +
+                   gvstrVHFDTSSCode + ',' +
+                   gvstrVHFCTCSSNr + ',' +
+                   gvstrVHFOffset;
+  end
+  else
+  begin
+
+    if gvstrUHFReverseState = gcstrOn then
+         UHFReverseOff;
+
+    vstrCmdStr := vstrCmdStr +
+                  gcstrUHFVFO + ',' +
+                  gvstrUHFRXFrequency + ',' +
+                  gvstrUHFStep + ',' +
+                  gvstrUHFShift + ',' +
+                  gvstrUHFReverse + ',' +
+                  gvstrUHFTone + ',' +
+                  gvstrUHFCTCSS + ',' +
+                  gvstrUHFDTSS + ',' +
+                  gvstrUHFToneNr + ',' +
+                  gvstrUHFDTSSCode + ',' +
+                  gvstrUHFCTCSSNr + ',' +
+                  gvstrUHFOffset;
+  end;// if vstrBand = gcstrVHF
+
+//***  showmessage(vstrCmdStr);
+
+  SendCommand('BUF', vstrCmdStr);
+
+end;// procedure SetBuffer
+
+//========================================================================================
+
+end.// unit BUFCommand;
+
