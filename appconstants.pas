@@ -66,7 +66,7 @@ unit AppConstants;
 //
 //  Ver: 1.0.0
 //
-//  Date: 7 Apr 2014
+//  Date: 2 Aug 2014
 //
 //========================================================================================
 
@@ -81,7 +81,7 @@ const
   //                             APPLICATIONM CONSATNTS
   //======================================================================================
 
-  gcstrAppDate: string = '25 Jul 2014';
+  gcstrAppDate: string = '2 Aug 2014';
   gcstrAppName: string = 'TMV7A';
   gcstrAppVersion: string = '1.0.0';
 
@@ -97,8 +97,8 @@ const
   gcstrVHF = '0';
   gcstrDTMF = '2';
 
-  gcstrVHFStep = '0';
-  gcstrUHFStep = '6';
+  gcstrVHFStep = '0'; // 5 kHz
+  gcstrUHFStep = '6'; // 25 kHz
 
   gcstrRFPowerLow = '2';
   gcstrRFPowerMedium = '1';
@@ -116,6 +116,7 @@ const
   gcstrNoShiftOffset = '00.00';
 
   gcbytMaxToneIndex = 37;
+  gcbytMaxStepIndex = 8;
 
   gcsngMinUHFFrequency = 410.000;
   gcsngMaxUHFFrequency = 469.999;

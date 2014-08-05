@@ -404,6 +404,8 @@ begin
     frmTMVFileReport.sdfFAVDataset.Active := False;
     frmTMVFileReport.sdfDTMFDataset.Active := False;
 
+    frmTMVFileReport.DeleteTempFiles;
+
 end;// procedure TfrmMain.mnuFilePrintTMV7ReportClick
 
 //----------------------------------------------------------------------------------------

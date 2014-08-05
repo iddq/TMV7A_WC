@@ -24,7 +24,7 @@ unit DataEntry_FAV;
 //
 //  Ver: 1.0.0
 //
-//  Date: 4 Jul 2013
+//  Date: 4 Aug 2013
 //
 //========================================================================================
 
@@ -103,6 +103,19 @@ begin
      end
      else
        frmDataEntry.edtTXFrequency.Text := '';
+
+     //====================================================
+     // Set the Step Combobox based on the band
+     //====================================================
+     if Length(gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+               gcbytRXFrequencyField]) > 0 then
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                    gcbytStepField])
+     else
+     if frmDataEntry.rbtUHF.Checked then
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrUHFStep)
+     else
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrVHFStep);
 
     //====================================================
     // Set the Tone Checkboxes and Tone Frequency Combobox
@@ -198,10 +211,6 @@ begin
   // We populate the Favourite Array using the Favourite Button number
   // as the primary key and the Field number as the sceondary key.
   //==================================================================
-
-  // Channel #
-//  gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber, gcbytChannelNrField] :=
-//    IntToStr(frmDataEntry.vbytChannelNumber);
 
   // VFO/Band
   if frmdataEntry.rbtVHF.Checked then

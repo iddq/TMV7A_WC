@@ -72,10 +72,22 @@ begin
     //==========================
     // Set the Band Radio buttons
     //==========================
+ {   if Length(gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+              gcbytRXFrequencyField]) > 0 then
+      frmDataEntry.cbxStep.ItemIndex := StrToInt(gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                   gcbytStepField])
+    else
+    if frmDataEntry.rbtUHF.Checked then
+      frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrUHFStep)
+    else
+      frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrVHFStep);  }
 
     if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
                                      gcbytVFOField] = gcstrUHF then
       frmDataEntry.rbtUHF.Checked := True
+    else if gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                     gcbytVFOField] = gcstrVHF then
+      frmDataEntry.rbtVHF.Checked := True
     else
       frmDataEntry.rbtVHF.Checked := True;
 
@@ -103,6 +115,19 @@ begin
      end
      else
        frmDataEntry.edtTXFrequency.Text := '';
+
+     //====================================================
+     // Set the Step Combobox based on the band
+     //====================================================
+     if Length(gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+               gcbytRXFrequencyField]) > 0 then
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gvstrFAVChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                    gcbytStepField])
+     else
+     if frmDataEntry.rbtUHF.Checked then
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrUHFStep)
+     else
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrVHFStep);
 
     //====================================================
     // Set the Tone Checkboxes and Tone Frequency Combobox

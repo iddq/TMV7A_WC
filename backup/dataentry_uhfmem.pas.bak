@@ -19,7 +19,7 @@ unit DataEntry_UHFMem;
 //
 //  Ver: 1.0.0
 //
-//  Date: 11 Aug 2013
+//  Date: 2 Aug 2014
 //
 //========================================================================================
 
@@ -71,8 +71,17 @@ begin
     if gvstrUHFChannelDataArray[frmDataEntry.vbytChannelNumber,
                                      gcbytVFOField] = gcstrUHF then
       frmDataEntry.rbtUHF.Checked := True
+    else if gvstrUHFChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                     gcbytVFOField] = gcstrVHF then
+      frmDataEntry.rbtVHF.Checked := True
     else
       frmDataEntry.rbtVHF.Checked := True;
+
+  {  if gvstrUHFChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                     gcbytVFOField] = gcstrUHF then
+      frmDataEntry.rbtUHF.Checked := True
+    else
+      frmDataEntry.rbtVHF.Checked := True; }
 
     //===========================
     // Set the Shift Radio buttons
@@ -99,7 +108,20 @@ begin
      else
        frmDataEntry.edtTXFrequency.Text := '';
 
-    //====================================================
+     //====================================================
+     // Set the Step Combobox based on the band
+     //====================================================
+     if Length(gvstrUHFChannelDataArray[frmDataEntry.vbytChannelNumber,
+               gcbytRXFrequencyField]) > 0 then
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gvstrUHFChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                    gcbytStepField])
+     else
+     if frmDataEntry.rbtUHF.Checked then
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrUHFStep)
+     else
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrVHFStep);
+
+     //====================================================
     // Set the Tone Checkboxes and Tone Frequency Combobox
     //====================================================
     if gvstrUHFChannelDataArray[frmDataEntry.vbytChannelNumber,
@@ -338,7 +360,7 @@ begin
    gvstrUHFChannelDataArray[frmDataEntry.vbytChannelNumber, gcbytCommentsField] :=
      frmDataEntry.edtComments.Text;
 
-   DisplayDataArray(drtUHFMEM, frmDataEntry.vbytChannelNumber);
+//   DisplayDataArray(drtUHFMEM, frmDataEntry.vbytChannelNumber);
    LoadUHFStringGrid;
 
 end;// procedure DataEntry_UHFMEM_Save;

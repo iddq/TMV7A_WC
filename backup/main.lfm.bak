@@ -47,7 +47,7 @@ object frmMain: TfrmMain
   OnClose = FormClose
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.4.0'
   object StatusBar1: TStatusBar
     Left = 0
     Height = 23

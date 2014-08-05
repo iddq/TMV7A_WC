@@ -31,7 +31,7 @@ unit DataEntry;
 //
 //  Ver: 1.0.0
 //
-//  Date: 8 Dec 2013
+//  Date: 2 Aug 2013
 //
 //========================================================================================
 
@@ -46,6 +46,8 @@ uses
 
 type
 
+  { TfrmDataEntry }
+
   TfrmDataEntry = class(TForm)
     bbtSave: TBitBtn;
     bbtClear: TBitBtn;
@@ -54,6 +56,7 @@ type
     chkScan: TCheckBox;
     chkDTSS: TCheckBox;
     cbxTones: TComboBox;
+    cbxStep: TComboBox;
     edtComments: TEdit;
     edtChannelName: TEdit;
     edtSource: TEdit;
@@ -72,6 +75,7 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
+    Label7: TLabel;
     Label8: TLabel;
     rbtRFPowerHigh: TRadioButton;
     rbtCTCSS: TRadioButton;
@@ -373,6 +377,17 @@ begin
 
   // Init the DTSS edit box
   DisableDTSSCode;
+
+  // Init the Step Combobox
+  for vbytTemp := 0 to gcbytMaxStepIndex do
+    frmDataEntry.cbxStep.Items.Add(gvstrStepArray[vbytTemp]);
+//  frmDataEntry.cbxStep.ItemIndex := 0;
+//  frmDataEntry.cbxStep.Text := IntToStr (frmDataEntry.cbxStep.ItemIndex); //Items[0];
+
+
+  // Load the Tone Combobox items
+  for vbytTemp := 0 to gcbytMaxToneIndex do
+    frmDataEntry.cbxTones.Items.Add(gvstrToneArray[vbytTemp]);
 
   // Configure the Command Buttons
   bbtSave.Enabled := True;

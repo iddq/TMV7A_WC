@@ -402,7 +402,9 @@ begin
     frmTMVFileReport.sdfVHFDataset.Active := False;
     frmTMVFileReport.sdfUHFDataset.Active := False;
     frmTMVFileReport.sdfFAVDataset.Active := False;
-//    frmTMVFileReport.sdfDTMFDataset.Active := False;
+    frmTMVFileReport.sdfDTMFDataset.Active := False;
+
+    TfrmTMVFileReport.DeleteTempFiles;
 
 end;// procedure TfrmMain.mnuFilePrintTMV7ReportClick
 

@@ -19,7 +19,7 @@ unit dataentry_vhfmem;
 //
 //  Ver: 1.0.0
 //
-//  Date: 11 Aug 2013
+//  Date: 2 Aug 2014
 //
 //========================================================================================
 
@@ -100,7 +100,20 @@ begin
      else
        frmDataEntry.edtTXFrequency.Text := '';
 
-    //====================================================
+     //====================================================
+     // Set the Step Combobox based on the band
+     //====================================================
+     if Length(gvstrVHFChannelDataArray[frmDataEntry.vbytChannelNumber,
+               gcbytRXFrequencyField]) > 0 then
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gvstrVHFChannelDataArray[frmDataEntry.vbytChannelNumber,
+                                    gcbytStepField])
+     else
+     if frmDataEntry.rbtUHF.Checked then
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrUHFStep)
+     else
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrVHFStep);
+
+     //====================================================
     // Set the Tone Checkboxes and Tone Frequency Combobox
     //====================================================
     if gvstrVHFChannelDataArray[frmDataEntry.vbytChannelNumber,

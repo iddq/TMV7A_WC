@@ -12,7 +12,7 @@ unit TMVFileReport;
 //
 //  Ver: 1.0.0
 //
-//  Date: 24 Apr 2014
+//  Date: 27 Jul 2014
 //
 //========================================================================================
 
@@ -40,7 +40,6 @@ type
     SdfFAVDataSet: TSdfDataSet;
     SdfUHFDataSet: TSdfDataSet;
     SdfVHFDataSet: TSdfDataSet;
-    procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure frVHFReportGetValue(const ParName: String; var ParValue: Variant);
   private
@@ -48,6 +47,7 @@ type
   public
     { public declarations }
     procedure CreateTmpFiles(vstrFileName : string);
+    procedure DeleteTempFiles;
   end;
 
 var
@@ -122,123 +122,9 @@ var
   vfilVHFFile : TextFile;
 
 //========================================================================================
-//          FORM ROUTINES
+//          PUBLIC ROUTINES
 //========================================================================================
-procedure TfrmTMVFileReport.FormCreate(Sender: TObject);
-begin
-
-    // Set up the VHF Dataset
-    sdfVHFDataSet.FieldDefs.Add(cstrCHNRFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrCHNRFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrVFOFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrVFOFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrRXFREQFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrRXFREQFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrSTEPFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrSTEPFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrSHIFTFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrSHIFTFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrREVERSEFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrREVERSEFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrTONEFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrTONEFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrTFREQFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrTFREQFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrDTSSFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrDTSSFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrDTSSCODEFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrDTSSCODEFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrSHIFTOFFSETFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrSHIFTOFFSETFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrSCANFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrSCANFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrRFPOWERFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrRFPOWERFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrCHNAMEFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrCHNAMEFieldDef);
-    sdfVHFDataSet.FieldDefs.Add(cstrCOMMENTSFieldDef, ftString);
-    sdfVHFDataSet.Schema.Add(cstrCOMMENTSFieldDef);
-
-    // Set up the UHF Dataset
-    sdfUHFDataSet.FieldDefs.Add(cstrCHNRFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrCHNRFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrVFOFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrVFOFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrRXFREQFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrRXFREQFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrSTEPFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrSTEPFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrSHIFTFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrSHIFTFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrREVERSEFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrREVERSEFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrTONEFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrTONEFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrTFREQFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrTFREQFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrDTSSFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrDTSSFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrDTSSCODEFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrDTSSCODEFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrSHIFTOFFSETFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrSHIFTOFFSETFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrSCANFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrSCANFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrRFPOWERFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrRFPOWERFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrCHNAMEFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrCHNAMEFieldDef);
-    sdfUHFDataSet.FieldDefs.Add(cstrCOMMENTSFieldDef, ftString);
-    sdfUHFDataSet.Schema.Add(cstrCOMMENTSFieldDef);
-
-    // Set up the FAV Dataset
-    sdfFAVDataSet.FieldDefs.Add(cstrCHNRFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrCHNRFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrVFOFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrVFOFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrRXFREQFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrRXFREQFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrSTEPFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrSTEPFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrSHIFTFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrSHIFTFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrREVERSEFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrREVERSEFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrTONEFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrTONEFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrTFREQFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrTFREQFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrDTSSFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrDTSSFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrDTSSCODEFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrDTSSCODEFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrSHIFTOFFSETFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrSHIFTOFFSETFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrSCANFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrSCANFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrRFPOWERFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrRFPOWERFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrCHNAMEFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrCHNAMEFieldDef);
-    sdfFAVDataSet.FieldDefs.Add(cstrCOMMENTSFieldDef, ftString);
-    sdfFAVDataSet.Schema.Add(cstrCOMMENTSFieldDef);
-
-    // Set up the DTMF Dataset
-    sdfDTMFDataSet.FieldDefs.Add(cstrCODENRFieldDef, ftString);
-    sdfDTMFDataSet.Schema.Add(cstrCODENRFieldDef);
-    sdfDTMFDataSet.FieldDefs.Add(cstrCODEFieldDef, ftString);
-    sdfDTMFDataSet.Schema.Add(cstrCODEFieldDef);
-
-end;// procedure TfrmTMVFileReport.FormCreate
-
-procedure TfrmTMVFileReport.FormActivate(Sender: TObject);
-begin
-    edtCHNR.text := sdfVHFDataSet.FieldValues[cstrCHNRFieldDef];
-    edtRXFREQUENCY.text := sdfVHFDataSet.FieldValues[cstrRXFREQFieldDef];
-    edtCHNAME.text := sdfVHFDataSet.FieldValues[cstrCHNAMEFieldDef];
-end;// procedure TfrmTMVFileReport.FormActivate
-
-procedure  TfrmTMVFileReport.CreateTmpFiles(vstrFileName : string);
+procedure TfrmTMVFileReport.CreateTmpFiles(vstrFileName : string);
 var
   vbytTemp : byte;
   vstrTStr : string;
@@ -399,8 +285,133 @@ begin
 
 
 
-end;
+end;// procedure TfrmTMVFileReport.CreateTmpFiles
 
+//========================================================================================
+procedure TfrmTMVFileReport.DeleteTempFiles;
+begin
+//  vstrDTMFFileName : string;
+//***  vfilFAVFile.Delete;;
+//  vstrFAVFileName : string;
+//  vfilDTMFFile : TextFile;
+//  vstrUHFFileName : string;
+ // vfilUHFFile : TextFile;
+//  vstrVHFFileName : string;
+//  vfilVHFFile : TextFile;
+
+end;// TfrmTMVFileReport.DeleteTempFIles
+
+//========================================================================================
+//          FORM ROUTINES
+//========================================================================================
+procedure TfrmTMVFileReport.FormCreate(Sender: TObject);
+begin
+
+    // Set up the VHF Dataset
+    sdfVHFDataSet.FieldDefs.Add(cstrCHNRFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrCHNRFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrVFOFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrVFOFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrRXFREQFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrRXFREQFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrSTEPFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrSTEPFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrSHIFTFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrSHIFTFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrREVERSEFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrREVERSEFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrTONEFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrTONEFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrTFREQFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrTFREQFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrDTSSFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrDTSSFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrDTSSCODEFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrDTSSCODEFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrSHIFTOFFSETFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrSHIFTOFFSETFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrSCANFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrSCANFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrRFPOWERFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrRFPOWERFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrCHNAMEFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrCHNAMEFieldDef);
+    sdfVHFDataSet.FieldDefs.Add(cstrCOMMENTSFieldDef, ftString);
+    sdfVHFDataSet.Schema.Add(cstrCOMMENTSFieldDef);
+
+    // Set up the UHF Dataset
+    sdfUHFDataSet.FieldDefs.Add(cstrCHNRFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrCHNRFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrVFOFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrVFOFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrRXFREQFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrRXFREQFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrSTEPFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrSTEPFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrSHIFTFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrSHIFTFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrREVERSEFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrREVERSEFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrTONEFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrTONEFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrTFREQFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrTFREQFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrDTSSFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrDTSSFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrDTSSCODEFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrDTSSCODEFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrSHIFTOFFSETFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrSHIFTOFFSETFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrSCANFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrSCANFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrRFPOWERFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrRFPOWERFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrCHNAMEFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrCHNAMEFieldDef);
+    sdfUHFDataSet.FieldDefs.Add(cstrCOMMENTSFieldDef, ftString);
+    sdfUHFDataSet.Schema.Add(cstrCOMMENTSFieldDef);
+
+    // Set up the FAV Dataset
+    sdfFAVDataSet.FieldDefs.Add(cstrCHNRFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrCHNRFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrVFOFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrVFOFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrRXFREQFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrRXFREQFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrSTEPFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrSTEPFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrSHIFTFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrSHIFTFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrREVERSEFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrREVERSEFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrTONEFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrTONEFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrTFREQFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrTFREQFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrDTSSFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrDTSSFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrDTSSCODEFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrDTSSCODEFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrSHIFTOFFSETFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrSHIFTOFFSETFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrSCANFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrSCANFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrRFPOWERFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrRFPOWERFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrCHNAMEFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrCHNAMEFieldDef);
+    sdfFAVDataSet.FieldDefs.Add(cstrCOMMENTSFieldDef, ftString);
+    sdfFAVDataSet.Schema.Add(cstrCOMMENTSFieldDef);
+
+    // Set up the DTMF Dataset
+    sdfDTMFDataSet.FieldDefs.Add(cstrCODENRFieldDef, ftString);
+    sdfDTMFDataSet.Schema.Add(cstrCODENRFieldDef);
+    sdfDTMFDataSet.FieldDefs.Add(cstrCODEFieldDef, ftString);
+    sdfDTMFDataSet.Schema.Add(cstrCODEFieldDef);
+
+end;// procedure TfrmTMVFileReport.FormCreate
+
+//========================================================================================
 procedure TfrmTMVFileReport.frVHFReportGetValue(const ParName: String; var ParValue: Variant);
 begin
 

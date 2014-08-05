@@ -39,7 +39,7 @@ unit Init;
 //
 //  Ver: 1.0.0
 //
-//  Date: 15 Sep 2013
+//  Date: 2 Aug 2014 2013
 //
 //========================================================================================
 
@@ -121,7 +121,7 @@ Begin
    gvstrStepArray[6] := '25';
    gvstrStepArray[7] := '30';
    gvstrStepArray[8] := '50';
-   gvstrStepArray[8] := '100';
+
  End;// InitStepArray
 
 //========================================================================================
@@ -166,8 +166,8 @@ begin
   InitStepArray;
 
   // Load the Tone Combobox items
-  for vbytTemp := 0 to gcbytMaxToneIndex do
-    frmDataEntry.cbxTones.Items.Add(gvstrToneArray[vbytTemp]);
+//  for vbytTemp := 0 to gcbytMaxToneIndex do
+//    frmDataEntry.cbxTones.Items.Add(gvstrToneArray[vbytTemp]);
 
   // Read the TMV File. If a previous .tmv file was open, then we simply reopen it.
   // If no .tmv7 file was open and a .tmv file exists, then we are prompted to open it.

@@ -23,8 +23,8 @@
         <UnitName Value="Main"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="1" Y="405"/>
+        <TopLine Value="401"/>
+        <CursorPos X="5" Y="407"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -35,8 +35,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="Init"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="25"/>
-        <CursorPos X="44" Y="33"/>
+        <TopLine Value="113"/>
+        <CursorPos X="1" Y="124"/>
         <UsageCount Value="200"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit2>
@@ -54,11 +54,10 @@
         <Filename Value="appconstants.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="AppConstants"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="61"/>
-        <CursorPos X="29" Y="84"/>
+        <TopLine Value="94"/>
+        <CursorPos X="15" Y="101"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -78,7 +77,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="INIStuff"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
+        <TopLine Value="120"/>
         <CursorPos X="13" Y="20"/>
         <UsageCount Value="200"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -193,10 +192,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="DataEntry"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="17"/>
-        <CursorPos X="54" Y="175"/>
+        <TopLine Value="377"/>
+        <CursorPos X="3" Y="385"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit17>
       <Unit18>
@@ -233,10 +235,12 @@
         <Filename Value="dataentry_fav.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DataEntry_FAV"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="20"/>
-        <CursorPos X="26" Y="25"/>
+        <TopLine Value="82"/>
+        <CursorPos X="1" Y="93"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit21>
       <Unit22>
@@ -326,10 +330,12 @@
         <Filename Value="dataentry_vhfmem.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="dataentry_vhfmem"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="62" Y="283"/>
+        <TopLine Value="104"/>
+        <CursorPos X="57" Y="108"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit30>
       <Unit31>
@@ -406,10 +412,13 @@
         <Filename Value="dataentry_uhfmem.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DataEntry_UHFMem"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="3" Y="341"/>
+        <TopLine Value="66"/>
+        <CursorPos X="24" Y="78"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit38>
       <Unit39>
@@ -468,7 +477,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="203"/>
-        <UsageCount Value="72"/>
+        <UsageCount Value="77"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit43>
       <Unit44>
@@ -478,7 +487,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="36" Y="57"/>
-        <UsageCount Value="49"/>
+        <UsageCount Value="54"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit44>
       <Unit45>
@@ -489,9 +498,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="TMVFileReport"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="63" Y="373"/>
-        <UsageCount Value="36"/>
+        <TopLine Value="286"/>
+        <CursorPos X="6" Y="294"/>
+        <UsageCount Value="41"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit45>
       <Unit46>
@@ -856,7 +865,7 @@
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="6" HistoryIndex="5">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="Main.pas"/>
         <Caret Line="393" Column="42" TopLine="378"/>
@@ -881,6 +890,62 @@
         <Filename Value="Main.pas"/>
         <Caret Line="399" Column="3" TopLine="381"/>
       </Position6>
+      <Position7>
+        <Filename Value="Main.pas"/>
+        <Caret Line="408" Column="5" TopLine="393"/>
+      </Position7>
+      <Position8>
+        <Filename Value="Main.pas"/>
+        <Caret Line="407" Column="5" TopLine="399"/>
+      </Position8>
+      <Position9>
+        <Filename Value="Main.pas"/>
+        <Caret Line="408" Column="5" TopLine="400"/>
+      </Position9>
+      <Position10>
+        <Filename Value="dataentry.pas"/>
+        <Caret Line="34" Column="16" TopLine="34"/>
+      </Position10>
+      <Position11>
+        <Filename Value="dataentry.pas"/>
+        <Caret Line="58" Column="13" TopLine="53"/>
+      </Position11>
+      <Position12>
+        <Filename Value="dataentry.pas"/>
+        <Caret Line="324" Column="26" TopLine="310"/>
+      </Position12>
+      <Position13>
+        <Filename Value="dataentry.pas"/>
+        <Caret Line="384" Column="39" TopLine="377"/>
+      </Position13>
+      <Position14>
+        <Filename Value="dataentry_fav.pas"/>
+        <Caret Line="117" Column="45" TopLine="105"/>
+      </Position14>
+      <Position15>
+        <Filename Value="dataentry_fav.pas"/>
+        <Caret Line="113" Column="8" TopLine="106"/>
+      </Position15>
+      <Position16>
+        <Filename Value="dataentry_vhfmem.pas"/>
+        <Caret Line="106" Column="52" TopLine="100"/>
+      </Position16>
+      <Position17>
+        <Filename Value="dataentry_fav.pas"/>
+        <Caret Line="111" Column="53" TopLine="107"/>
+      </Position17>
+      <Position18>
+        <Filename Value="dataentry_vhfmem.pas"/>
+        <Caret Line="106" Column="57" TopLine="104"/>
+      </Position18>
+      <Position19>
+        <Filename Value="dataentry_fav.pas"/>
+        <Caret Line="118" Column="57" TopLine="107"/>
+      </Position19>
+      <Position20>
+        <Filename Value="dataentry_uhfmem.pas"/>
+        <Caret Line="107" Column="59" TopLine="103"/>
+      </Position20>
     </JumpHistory>
     <CustomSessionData Count="2">
       <Item0 Name="SVN active" Value="-1"/>
