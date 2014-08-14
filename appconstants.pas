@@ -66,7 +66,7 @@ unit AppConstants;
 //
 //  Ver: 1.0.0
 //
-//  Date: 2 Aug 2014
+//  Date: 8 Aug 2014
 //
 //========================================================================================
 
@@ -81,7 +81,7 @@ const
   //                             APPLICATIONM CONSATNTS
   //======================================================================================
 
-  gcstrAppDate: string = '2 Aug 2014';
+  gcstrAppDate: string = '8 Aug 2014';
   gcstrAppName: string = 'TMV7A';
   gcstrAppVersion: string = '1.0.0';
 
@@ -222,7 +222,7 @@ const
   gcbytMinChannelNameLength = 5;
   gcbytMaxDTSSCodeLength = 3;
   gcbytMinDTSSCodeLength = 3;
-  gcbytMaxFrequencyLength = 7;
+  gcbytMaxFrequencyLength = 9;
   gcbytMinFrequencyLength = 7;
 
   //======================================================================================

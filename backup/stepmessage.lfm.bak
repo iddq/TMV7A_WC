@@ -1,0 +1,43 @@
+object frmStepMessage: TfrmStepMessage
+  Left = 512
+  Height = 240
+  Top = 264
+  Width = 320
+  Caption = 'frmStepMessage'
+  ClientHeight = 240
+  ClientWidth = 320
+  OnActivate = FormActivate
+  LCLVersion = '1.2.4.0'
+  object lblStepMessage: TLabel
+    Left = 119
+    Height = 15
+    Top = 41
+    Width = 82
+    Alignment = taCenter
+    Caption = 'lblStepMessage'
+    ParentColor = False
+  end
+  object BitBtn1: TBitBtn
+    Left = 40
+    Height = 30
+    Top = 168
+    Width = 75
+    Caption = 'Correct'
+    Kind = bkRetry
+    ModalResult = 4
+    OnClick = BitBtn1Click
+    TabOrder = 0
+  end
+  object BitBtn2: TBitBtn
+    Left = 184
+    Height = 30
+    Top = 168
+    Width = 75
+    Caption = 'Accept'
+    Default = True
+    Kind = bkOK
+    ModalResult = 1
+    OnClick = BitBtn2Click
+    TabOrder = 1
+  end
+end

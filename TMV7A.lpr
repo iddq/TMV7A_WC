@@ -14,7 +14,8 @@ uses
   TMVFiles, Utilities, DataEntry_FAV, AppTypes, SMCommand, AGCommand, SQCommand,
   RXCommand, TXCommand, Mute, MEM, dataentry_vhfmem, MEM_VHF, MEM_UHF, MEM_DTMF,
   TMVFiles_DTMF, TMVFiles_UHF, TMVFiles_VHF, TMVFiles_FAV, DataEntry_UHFMem,
-  Register, SplashAbout, NagScreen, HUtils, Reverse, PCCommand, TMVFileReport;
+  Register, SplashAbout, NagScreen, HUtils, Reverse, PCCommand, TMVFileReport,
+  StepMessage;
 
 {$R *.res}
 
@@ -29,6 +30,7 @@ begin
   Application.CreateForm(TdlgSplashAbout, dlgSplashAbout);
   Application.CreateForm(TdlgNagScreen, dlgNagScreen);
   Application.CreateForm(TfrmTMVFileReport, frmTMVFileReport);
+  Application.CreateForm(TfrmStepMessage, frmStepMessage);
   Application.Run;
 end.
 

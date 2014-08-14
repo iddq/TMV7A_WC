@@ -81,7 +81,7 @@ const
   //                             APPLICATIONM CONSATNTS
   //======================================================================================
 
-  gcstrAppDate: string = '2 Aug 2014';
+  gcstrAppDate: string = '6 Aug 2014';
   gcstrAppName: string = 'TMV7A';
   gcstrAppVersion: string = '1.0.0';
 
@@ -97,8 +97,8 @@ const
   gcstrVHF = '0';
   gcstrDTMF = '2';
 
-  gcstrVHFStep = '0';
-  gcstrUHFStep = '6';
+  gcstrVHFStep = '0'; // 5 kHz
+  gcstrUHFStep = '6'; // 25 kHz
 
   gcstrRFPowerLow = '2';
   gcstrRFPowerMedium = '1';

@@ -19,7 +19,7 @@ unit DataEntry_UHFMem;
 //
 //  Ver: 1.0.0
 //
-//  Date: 2 Aug 2014
+//  Date: 5 Aug 2014
 //
 //========================================================================================
 
@@ -46,7 +46,7 @@ var
 
 begin
 
-    frmDataEntry.Caption := frmDataEntry.cstrMemFormTitle;
+    frmDataEntry.Caption := 'UHF ' + frmDataEntry.cstrMemFormTitle;
     frmDataEntry.edtSource.Text := Format('UHF%.2d',[frmDataEntry.vbytChannelNumber]);
 
     //=====================
@@ -75,7 +75,7 @@ begin
                                      gcbytVFOField] = gcstrVHF then
       frmDataEntry.rbtVHF.Checked := True
     else
-      frmDataEntry.rbtVHF.Checked := True;
+      frmDataEntry.rbtUHF.Checked := True;
 
   {  if gvstrUHFChannelDataArray[frmDataEntry.vbytChannelNumber,
                                      gcbytVFOField] = gcstrUHF then

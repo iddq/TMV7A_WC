@@ -18,7 +18,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <BuildNr Value="50"/>
+      <BuildNr Value="54"/>
       <StringTable ProductVersion=""/>
     </VersionInfo>
     <BuildModes Count="1">
@@ -72,7 +72,7 @@
         <PackageName Value="LCL"/>
       </Item12>
     </RequiredPackages>
-    <Units Count="46">
+    <Units Count="47">
       <Unit0>
         <Filename Value="TMV7A.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -327,6 +327,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="TMVFileReport"/>
       </Unit45>
+      <Unit46>
+        <Filename Value="stepmessage.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmStepMessage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="StepMessage"/>
+      </Unit46>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

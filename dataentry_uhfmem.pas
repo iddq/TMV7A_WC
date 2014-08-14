@@ -19,7 +19,7 @@ unit DataEntry_UHFMem;
 //
 //  Ver: 1.0.0
 //
-//  Date: 2 Aug 2014
+//  Date: 5 Aug 2014
 //
 //========================================================================================
 
@@ -46,7 +46,7 @@ var
 
 begin
 
-    frmDataEntry.Caption := frmDataEntry.cstrMemFormTitle;
+    frmDataEntry.Caption := 'UHF ' + frmDataEntry.cstrMemFormTitle;
     frmDataEntry.edtSource.Text := Format('UHF%.2d',[frmDataEntry.vbytChannelNumber]);
 
     //=====================
@@ -143,9 +143,13 @@ begin
                                gcbytToneNrField]);
     frmDataEntry.cbxTones.ItemIndex := GetToneIndexFromToneNr( vbytToneNr);
 
-    // Now Clear the Text field if there is no Tone function selected.
+    // Now Clear the Text field and disable the list box if there is no Tone function
+    //  selected.
     if frmDataEntry.rbtNoTones.Checked then
+    begin
       frmDataEntry.cbxTones.Text := '';
+      frmDataEntry.cbxTones.Enabled := False;
+    end;
 
     //======================================
     //  Set the DTSS Checkbox and Code field

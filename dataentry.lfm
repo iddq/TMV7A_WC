@@ -22,18 +22,18 @@ object frmDataEntry: TfrmDataEntry
     TabOrder = 7
     object rbtVHF: TRadioButton
       Left = 18
-      Height = 17
+      Height = 19
       Top = 20
-      Width = 37
+      Width = 42
       Caption = 'VHF'
       OnChange = rbtVHFChange
       TabOrder = 0
     end
     object rbtUHF: TRadioButton
       Left = 18
-      Height = 17
+      Height = 19
       Top = 61
-      Width = 38
+      Width = 43
       Caption = 'UHF'
       TabOrder = 1
       TabStop = True
@@ -50,30 +50,30 @@ object frmDataEntry: TfrmDataEntry
     TabOrder = 0
     object Label1: TLabel
       Left = 22
-      Height = 13
+      Height = 15
       Top = 11
-      Width = 43
+      Width = 45
       Caption = 'Source : '
       ParentColor = False
     end
     object Label2: TLabel
       Left = 22
-      Height = 13
+      Height = 15
       Top = 44
-      Width = 77
+      Width = 81
       Caption = 'RX Frequency : '
       ParentColor = False
     end
     object Label3: TLabel
       Left = 22
-      Height = 13
+      Height = 15
       Top = 75
-      Width = 76
+      Width = 81
       Caption = 'TX Frequency : '
       ParentColor = False
     end
     object edtSource: TEdit
-      Left = 118
+      Left = 124
       Height = 23
       Top = 5
       Width = 55
@@ -88,7 +88,7 @@ object frmDataEntry: TfrmDataEntry
       Left = 118
       Height = 23
       Top = 37
-      Width = 55
+      Width = 66
       Alignment = taCenter
       AutoSize = False
       OnExit = edtRXFrequencyExit
@@ -99,7 +99,7 @@ object frmDataEntry: TfrmDataEntry
       Left = 118
       Height = 23
       Top = 73
-      Width = 55
+      Width = 66
       Alignment = taCenter
       AutoSize = False
       Color = 8454143
@@ -108,19 +108,19 @@ object frmDataEntry: TfrmDataEntry
       TabOrder = 2
     end
     object cbxStep: TComboBox
-      Left = 184
-      Height = 21
-      Top = 48
+      Left = 200
+      Height = 23
+      Top = 37
       Width = 48
-      ItemHeight = 13
+      ItemHeight = 15
       Style = csDropDownList
       TabOrder = 3
     end
     object Label7: TLabel
-      Left = 199
-      Height = 13
-      Top = 24
-      Width = 22
+      Left = 216
+      Height = 15
+      Top = 13
+      Width = 23
       Caption = 'Step'
       ParentColor = False
     end
@@ -136,20 +136,20 @@ object frmDataEntry: TfrmDataEntry
     TabOrder = 2
     object cbxTones: TComboBox
       Left = 86
-      Height = 21
+      Height = 23
       Top = 20
       Width = 60
       AutoSize = False
       Color = clYellow
-      ItemHeight = 13
+      ItemHeight = 15
       Style = csDropDownList
       TabOrder = 3
     end
     object chkDTSS: TCheckBox
       Left = 14
-      Height = 17
+      Height = 19
       Top = 68
-      Width = 43
+      Width = 47
       Caption = 'DTSS'
       OnChange = chkDTSSChange
       TabOrder = 4
@@ -165,17 +165,17 @@ object frmDataEntry: TfrmDataEntry
     end
     object Label8: TLabel
       Left = 78
-      Height = 13
+      Height = 15
       Top = 0
-      Width = 78
+      Width = 85
       Caption = 'Tone Frequency'
       ParentColor = False
     end
     object rbtNoTones: TRadioButton
       Left = 15
-      Height = 17
+      Height = 19
       Top = 8
-      Width = 43
+      Width = 49
       Caption = 'None'
       OnChange = rbtNoTonesChange
       TabOrder = 0
@@ -183,18 +183,18 @@ object frmDataEntry: TfrmDataEntry
     end
     object rbtTone: TRadioButton
       Left = 15
-      Height = 17
+      Height = 19
       Top = 24
-      Width = 42
+      Width = 47
       Caption = 'Tone'
       TabOrder = 1
       TabStop = True
     end
     object rbtCTCSS: TRadioButton
       Left = 15
-      Height = 17
+      Height = 19
       Top = 40
-      Width = 50
+      Width = 55
       Caption = 'CTCSS'
       TabOrder = 2
       TabStop = True
@@ -211,9 +211,9 @@ object frmDataEntry: TfrmDataEntry
     TabOrder = 1
     object rbtPlus: TRadioButton
       Left = 14
-      Height = 17
+      Height = 19
       Top = 40
-      Width = 37
+      Width = 42
       Caption = 'Plus'
       OnChange = rbtPlusChange
       TabOrder = 1
@@ -221,9 +221,9 @@ object frmDataEntry: TfrmDataEntry
     end
     object rbtMinus: TRadioButton
       Left = 14
-      Height = 17
+      Height = 19
       Top = 72
-      Width = 45
+      Width = 53
       Caption = 'Minus'
       OnChange = rbtMinusChange
       TabOrder = 2
@@ -231,9 +231,9 @@ object frmDataEntry: TfrmDataEntry
     end
     object Label4: TLabel
       Left = 78
-      Height = 13
+      Height = 15
       Top = 24
-      Width = 34
+      Width = 35
       Caption = 'Offset '
       ParentColor = False
     end
@@ -250,9 +250,9 @@ object frmDataEntry: TfrmDataEntry
     end
     object rbtSimplex: TRadioButton
       Left = 14
-      Height = 17
+      Height = 19
       Top = 11
-      Width = 54
+      Width = 61
       Caption = 'Simplex'
       OnChange = rbtSimplexChange
       TabOrder = 0
@@ -270,27 +270,27 @@ object frmDataEntry: TfrmDataEntry
     TabOrder = 3
     object rbtRFPowerLow: TRadioButton
       Left = 30
-      Height = 17
+      Height = 19
       Top = 8
-      Width = 37
+      Width = 42
       Caption = 'Low'
       TabOrder = 0
       TabStop = True
     end
     object rbtRFPowerMedium: TRadioButton
       Left = 30
-      Height = 17
+      Height = 19
       Top = 36
-      Width = 54
+      Width = 65
       Caption = 'Medium'
       TabOrder = 1
       TabStop = True
     end
     object rbtRFPowerHigh: TRadioButton
       Left = 30
-      Height = 17
+      Height = 19
       Top = 64
-      Width = 39
+      Width = 46
       Caption = 'High'
       TabOrder = 2
       TabStop = True
@@ -298,9 +298,9 @@ object frmDataEntry: TfrmDataEntry
   end
   object chkScan: TCheckBox
     Left = 238
-    Height = 17
+    Height = 19
     Top = 168
-    Width = 41
+    Width = 45
     Caption = 'Scan'
     TabOrder = 4
   end
@@ -349,9 +349,9 @@ object frmDataEntry: TfrmDataEntry
   end
   object Label5: TLabel
     Left = 223
-    Height = 13
+    Height = 15
     Top = 200
-    Width = 69
+    Width = 79
     Caption = 'Channel Name'
     ParentColor = False
   end
@@ -367,9 +367,9 @@ object frmDataEntry: TfrmDataEntry
   end
   object Label6: TLabel
     Left = 233
-    Height = 13
+    Height = 15
     Top = 266
-    Width = 50
+    Width = 59
     Caption = 'Comments'
     ParentColor = False
   end

@@ -15,6 +15,7 @@ unit DataEntry;
 //         DataEntry_VHFMEM : DataEntry_VHFMEM_Init
 //                            DataEntry_VHFMEM_Save
 //         Main
+//         StepMessage : frmStepMEssage.Show
 //         Utilities : GetToneNrFromIndex
 //                     GetToneIndexFromToneNr
 //                     ValidVHFFrequency
@@ -31,7 +32,7 @@ unit DataEntry;
 //
 //  Ver: 1.0.0
 //
-//  Date: 2 Aug 2013
+//  Date: 86 Aug 2014
 //
 //========================================================================================
 
@@ -42,7 +43,7 @@ uses
   StdCtrls, Buttons,
   // Application Units
   AppConstants, AppTypes, AppVariables, DataEntry_FAV, DataEntry_UHFMEM, DataEntry_VHFMEM,
-  Utilities;
+  StepMessage, Utilities;
 
 type
 
@@ -159,6 +160,14 @@ const
                                'The frequency must be in the format nnn.nnn' +
                                #13 +
                                '      and between 400.000 and 469.999';
+
+   cstrInvalidVHFStepMsg = '    Invalid VHF Step value.' +
+                           #13 +
+                           'The Step value should be 5 kHz.';
+
+  cstrInvalidUHFStepMsg = '    Invalid UHF Step value.' +
+                          #13 +
+                          'The Step value should be 25 kHz.';
 
   cstrResetMsg = '  Conifirm that you wish to Reset the form.' +
                  #13 +
@@ -321,10 +330,32 @@ end;// procedure SetShifOffset;
 procedure SetToneFreq;
 begin
   if frmDataEntry.rbtNoTones.Checked then
-    frmDataEntry.cbxTones.Text := ''
+  begin
+    frmDataEntry.cbxTones.Text := '';
+    frmDataENtry.cbxTones.Enabled := False;
+  end
   else
+  begin
     frmDataEntry.cbxTones.Text := IntToStr (frmDataEntry.cbxTones.ItemIndex); //Items[0];
+    frmDataEntry.cbxTones.Enabled := True;
+  end;
 end;// procedure SetToneFreq;
+
+//----------------------------------------------------------------------------------------
+procedure SetStepValue;
+begin
+
+  if Length(frmDataEntry.edtTXFrequency.Text) = 0 then
+  begin
+    if frmDataEntry.rbtVHF.Checked then
+      frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrVHFStep)
+    else
+      frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrUHFStep);
+  end
+  else
+    ShowMessage('Non-Standard Step for Band');// if Length(frmDataEntry.edtTXFrequency.Text) = 0
+
+end;// procedure SetStepValue;
 
 //----------------------------------------------------------------------------------------
 procedure TfrmDataEntry.SetDTSSCode;
@@ -676,6 +707,7 @@ end;// procedure TfrmDataEntry.edtCommentsKeyPress
 procedure TfrmDataEntry.rbtVHFChange(Sender: TObject);
 begin
   SetShiftOffset;
+  SetStepValue;
 end;//procedure TfrmDataEntry.rbtVHFChange(
 
 //----------------------------------------------------------------------------------------
@@ -729,16 +761,50 @@ end;// procedure TfrmDataEntry.chkDTSSChange
 procedure TfrmDataEntry.edtRXFrequencyExit(Sender: TObject);
 begin
 
+  // Check for Valid Frequency
   if rbtVHF.Checked then
   begin
     if not ValidVHFFrequency(edtRXFrequency.Text) then
+    begin
+      ShowMessage(cstrInvalidVHFFrequencyMsg);
       Exit;
+    end
   end
   else
   begin
-  if not ValidUHFFrequency(edtRXFrequency.Text) then
+    if not ValidUHFFrequency(edtRXFrequency.Text) then
+    begin
+      ShowMessage(cstrInvalidUHFFrequencyMsg);
       Exit;
+    end;
   end;// if rbtVHF.Checked
+
+  // Frequency is valid so now we check against the Step value
+  if rbtVHF.Checked then
+  begin
+    // If VHF then Step should be 5 kHz or gcstrVHFStep Item Index 0
+    if not (IntToStr(cbxStep.ItemIndex) = gcstrVHFStep) then
+    begin
+      ShowMessage(cstrInvalidVHFStepMsg);
+      frmStepMessage.Show;
+      Exit;
+    end
+  end
+  else
+  begin
+    showmessage(IntToStr(cbxStep.ItemIndex));
+    // If UHF then Step should be 25 kHz or gcstrUHFStep Item Index 6
+    if not (IntToStr(cbxStep.ItemIndex) = gcstrUHFStep) then
+    begin
+      ShowMessage(cstrInvalidUHFStepMsg);
+      frmStepMessage.Show;
+      Exit;
+    end;
+  end;// if rbtVHF.Checked
+
+  // Now we Calculate the "Stepped" RX Frequency if necessary
+
+
 
   edtTXFrequency.Text := CalculateTXFrequency;
 

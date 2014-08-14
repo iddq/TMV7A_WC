@@ -30,7 +30,7 @@ unit TMVFiles;
 //
 //  Ver: 1.0.0
 //
-//  Date: 10 Aug 2013
+//  Date: 28 Aug 2013
 //
 //========================================================================================
 
@@ -92,7 +92,7 @@ begin
   end;// if Length(vstrFName) = 0
 
     // Open the file for Reading
-    gvstrTMVFileName := vstrFName;
+//    gvstrTMVFileName := vstrFName;
     Assign(TMVFile, gvstrTMVFileName);
     Reset(TMVFile);
 

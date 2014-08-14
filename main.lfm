@@ -389,8 +389,7 @@ object frmMain: TfrmMain
         Left = 16
         Height = 76
         Top = 50
-        Width = 235
-        Alignment = taCenter
+        Width = 280
         AutoSize = False
         Caption = '888.888'
         Font.CharSet = ANSI_CHARSET
@@ -403,11 +402,10 @@ object frmMain: TfrmMain
         ParentFont = False
       end
       object lblUHFFreq: TLabel
-        Left = 343
+        Left = 312
         Height = 76
         Top = 50
-        Width = 235
-        Alignment = taCenter
+        Width = 282
         AutoSize = False
         Caption = '888.888'
         Font.CharSet = ANSI_CHARSET
@@ -610,7 +608,7 @@ object frmMain: TfrmMain
       object btnBand: TButton
         Left = 272
         Height = 20
-        Top = 66
+        Top = 32
         Width = 50
         Caption = 'Band'
         OnClick = btnBandClick
