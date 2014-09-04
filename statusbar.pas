@@ -16,7 +16,7 @@ unit StatusBar;
 //
 //  Ver: 1.0.0
 //
-//  Date: 11 Dec 2013
+//  Date: 24 Aug 2014
 //
 //========================================================================================
 
@@ -105,16 +105,16 @@ begin
     if frmMain.sdpoSerial1.Active then
     begin
       frmMain.StatusBar1.Panels[gcbytCOMPortStatusPanel].text := gvstrCOMPort + ' - Open';
-      frmMain.mnuConfigSelectPort.Enabled := False;
-      frmMain.mnuConfigOpenPort.Enabled := False;
-      frmMain.mnuConfigClosePort.Enabled := True;;
+ //     frmMain.mnuConfigSelectPort.Enabled := False;
+//      frmMain.mnuConfigOpenPort.Enabled := False;
+//      frmMain.mnuConfigClosePort.Enabled := True;;
     end
     else
     begin
       frmMain.StatusBar1.Panels[gcbytCOMPortStatusPanel].text := gvstrCOMPort + ' - Closed';
-      frmMain.mnuConfigSelectPort.Enabled := True;
-      frmMain.mnuConfigOpenPort.Enabled := True;
-      frmMain.mnuConfigClosePort.Enabled := False;;
+//      frmMain.mnuConfigSelectPort.Enabled := True;
+//      frmMain.mnuConfigOpenPort.Enabled := True;
+//      frmMain.mnuConfigClosePort.Enabled := False;;
     end;// if frmMain.sdpoSerial1.Active
   end;// if gvstrCOMPort = gcstrDefCOMPort
 

@@ -15,6 +15,8 @@ unit AppVariables;
 //                          SetBuffer
 //             ColourSchemes : SetColourScheme
 //             COMPort : TfrmCOMPort.bbtOkClick
+//             Configure : TfrmConfigure.FormActivate
+//                         TfrmConfigure.FormCreate
 //             DataEntry : TfrmDataEntry.FormActivate
 //                         TfrmDataEntry.bbtSaveClick
 //             DataEntry_FAV : DataEntry_FAV_Init
@@ -68,7 +70,7 @@ unit AppVariables;
 //
 //  Ver: 1.0.0
 //
-//  Date: 7 Dec 2013
+//  Date: 27 Aug 2014
 //
 //========================================================================================
 
@@ -105,7 +107,8 @@ gvstrDTMFCodeDataArray : array[gcbytArrayStartValue..gcbytMaxDTMFEntries] of str
 
 // TMV7 Array Variables
 gvstrToneArray : array[0..gcbytMaxToneIndex] of string;
-gvstrStepArray : array[0..9] of string;
+gvstrStepArray : array[0..8] of string = ('5', '6.25', '10', '12.5', '15', '20', '25',
+                                          '30', '50');
 
 //========================================================================================
 //          COLOUR SCHEMES
@@ -167,6 +170,7 @@ gvstrVHFOrigCTCSS : string;
 gvblnKeywordMatched : boolean;
 gvblnSendTimeout : boolean;
 gvstrCOMPort : string;
+gvintBaudRate : integer;
 gvstrKeywordRcvd : string;
 gvstrKeywordSent : string;
 

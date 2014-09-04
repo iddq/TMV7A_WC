@@ -13,6 +13,8 @@ unit AppConstants;
 //             BCCommand : TogglePTTBand
 //             BUFCommand : BUFResponseHandler
 //             BYCommand : BYResponseHandler
+//             Configure : TfrmConfigure.FormActivate
+//                         TfrmConfigure.FormCreate
 //             DataEntry : TfrmDataEntry.FormActivate
 //                         TfrmDataEntry.bbtSaveClick
 //             DataEntry_FAV : DataEntry_FAV_Init
@@ -66,7 +68,7 @@ unit AppConstants;
 //
 //  Ver: 1.0.0
 //
-//  Date: 8 Aug 2014
+//  Date: 9 Sep 2014
 //
 //========================================================================================
 
@@ -81,7 +83,7 @@ const
   //                             APPLICATIONM CONSATNTS
   //======================================================================================
 
-  gcstrAppDate: string = '8 Aug 2014';
+  gcstrAppDate: string = '23 Aug 2014';
   gcstrAppName: string = 'TMV7A';
   gcstrAppVersion: string = '1.0.0';
 
@@ -97,8 +99,8 @@ const
   gcstrVHF = '0';
   gcstrDTMF = '2';
 
-  gcstrVHFStep = '0'; // 5 kHz
-  gcstrUHFStep = '6'; // 25 kHz
+  gcstrConfigVHFStep = '0'; // 5 kHz
+  gcstrConfigUHFStep = '6'; // 25 kHz
 
   gcstrRFPowerLow = '2';
   gcstrRFPowerMedium = '1';
@@ -112,8 +114,10 @@ const
   gcstrShiftMinus = '2';
 
   gcstrVHFShiftOffset = '00.60';
-  gcstrUHFShiftOffset = '05.00';
+  gcstrUHFShiftOffsetA = '05.00'; // TMV7A
+  gcstrUHFShiftOffsetE = '01.60'; // TMV7E
   gcstrNoShiftOffset = '00.00';
+
 
   gcbytMaxToneIndex = 37;
   gcbytMaxStepIndex = 8;
@@ -222,7 +226,7 @@ const
   gcbytMinChannelNameLength = 5;
   gcbytMaxDTSSCodeLength = 3;
   gcbytMinDTSSCodeLength = 3;
-  gcbytMaxFrequencyLength = 9;
+  gcbytMaxFrequencyLength = 13;
   gcbytMinFrequencyLength = 7;
 
   //======================================================================================
@@ -280,8 +284,11 @@ const
   //======================================================================================
 
   // Serial Port Constants
-  gcstrDefCOMPort = '';
+  gcstrDefCOMPort = '1';
   gcstrAutoOpenCOMPort = False;
+  gcintDefBaudRate = 9600;
+  gcint1200Baud = 1200;
+  gcint9600Baud = 9600;
 
 implementation
 

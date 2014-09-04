@@ -25,7 +25,7 @@ unit Utilities;
 //
 //  Ver: 1.0.0
 //
-//  Date: 6 Apr 2014
+//  Date: 20 Aug 2014
 //
 //========================================================================================
 
@@ -161,7 +161,8 @@ begin
 
   Result := True;
 
-  if Length(vstrVHFFrequency) <> 7 then
+//  if Length(vstrVHFFrequency) <> 7 then
+  if Length(vstrVHFFrequency) < 7 then
   begin
     Result := False;
     Exit;
@@ -185,7 +186,8 @@ begin
 
   Result := True;
 
-  if Length(vstrUHFFrequency) <> 7 then
+//  if Length(vstrUHFFrequency) <> 7 then
+  if Length(vstrUHFFrequency) < 7 then
   begin
     Result := False;
     Exit;

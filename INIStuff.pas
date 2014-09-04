@@ -17,7 +17,7 @@ unit INIStuff;
 //
 //  Ver: 1.0.0
 //
-//  Date: 21 Dec 2013
+//  Date: 1 Sep 2014
 //
 //========================================================================================
 
@@ -42,7 +42,7 @@ uses
 const
   cstrSectionCONFIG = 'CONFIG';
     cstrKeyCOMPort = 'COM Port';
-    cstrKeyColourScheme = 'Colour Scheme';
+    cstrKeyBaudRate = 'Baud Rate';
   cstrSectionTMVFILES = 'TMV FILES';
     cstrKeyTMVFileName = 'TMVFileName';
   cstrSectionUHF = 'UHF';
@@ -94,7 +94,7 @@ const
   cstrSectionLCDDisplay = 'LCD DISPLAY';
     cstrKeyPTTBand = 'PTT Band';
   cstrSectionColourSchemes = 'COLOUR SCHEMES';
-    cstrKeyCurrentColourScheme = 'Current COlour Scheme';
+    cstrKeyCurrentColourScheme = 'Current Colour Scheme';
   cstrSectionRegistration = 'REGISTRATION';
     cstrKeyRegistered = 'Registered';
     cstrKeyRegisteredName = 'Registered Name';
@@ -122,7 +122,10 @@ begin
   INIFile := TINIFile.Create(vstrINIFileName);
 
   // CONFIG SECTION
-  gvstrCOMPort := INIFile.Readstring (cstrSectionCONFIG, cstrKeyCOMPort, gcstrDefCOMPort);
+  gvstrCOMPort := INIFile.Readstring (cstrSectionCONFIG, cstrKeyCOMPort,
+                                                         gcstrDefCOMPort);
+  gvintBaudRate := INIFile.ReadInteger (cstrSectionCONFIG, cstrKeyBaudRate,
+                                                           gcintDefBaudRate);
 
   // TMVFILES SECTION
   gvstrTMVFileName := INIFile.ReadString (cstrSectionTMVFILES, cstrKeyTMVFileName, '');
@@ -225,7 +228,7 @@ begin
 
   // COLOUR SCHEMES SECTION
   gvstrCurrentColourScheme := INIFile.ReadString (cstrSectionColourSchemes,
-                        cstrKeyCurrentColourScheme, gcstrDefaultColourScheme);
+                        cstrKeyCurrentColourScheme, '1'{gcstrDefaultColourScheme});
 
   // REGISTRATION SECTION
   gvblnRegistered := INIFile.ReadBool (cstrSectionRegistration,
@@ -259,6 +262,7 @@ begin
 
    // CONFIG SECTION
    INIFile.WriteString (cstrSectionCONFIG, cstrKeyCOMPort, gvstrCOMPort);
+   INIFile.WriteInteger (cstrSectionCONFIG, cstrKeyBaudRate, gvintBaudRate);
 
    // TMVFILES SECTION
    INIFile.WriteString (cstrSectionTMVFILES, cstrKeyTMVFileName, gvstrTMVFileName);

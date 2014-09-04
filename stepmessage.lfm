@@ -1,16 +1,17 @@
 object frmStepMessage: TfrmStepMessage
-  Left = 512
-  Height = 184
-  Top = 264
+  Left = 367
+  Height = 212
+  Top = 120
   Width = 320
-  Caption = 'Non-Standard Step Value'
-  ClientHeight = 184
+  BorderStyle = bsDialog
+  Caption = 'Non-Standard Step Frequency'
+  ClientHeight = 212
   ClientWidth = 320
   OnActivate = FormActivate
   LCLVersion = '1.2.4.0'
   object lblStepMessage: TLabel
     Left = 24
-    Height = 104
+    Height = 64
     Top = 24
     Width = 266
     Alignment = taCenter
@@ -18,27 +19,61 @@ object frmStepMessage: TfrmStepMessage
     Caption = 'Non-Standard Step Value'
     ParentColor = False
   end
-  object BitBtn1: TBitBtn
-    Left = 64
+  object bbtCorrect: TBitBtn
+    Left = 183
     Height = 30
-    Top = 136
+    Top = 160
     Width = 75
     Caption = 'Correct'
     Kind = bkRetry
-    ModalResult = 4
-    OnClick = BitBtn1Click
+    ModalResult = 11
+    OnClick = bbtCorrectClick
     TabOrder = 0
   end
-  object BitBtn2: TBitBtn
-    Left = 176
+  object bbtAccept: TBitBtn
+    Left = 44
     Height = 30
-    Top = 136
+    Top = 160
     Width = 75
     Caption = 'Accept'
     Default = True
     Kind = bkOK
-    ModalResult = 1
-    OnClick = BitBtn2Click
+    ModalResult = 11
+    OnClick = bbtAcceptClick
     TabOrder = 1
+  end
+  object Label1: TLabel
+    Left = 160
+    Height = 13
+    Top = 104
+    Width = 120
+    Caption = 'Corrected RX Frequemcy'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 28
+    Height = 13
+    Top = 104
+    Width = 107
+    Caption = 'Current RX Frequency'
+    ParentColor = False
+  end
+  object edtCorrectedRXFreq: TEdit
+    Left = 184
+    Height = 21
+    Top = 128
+    Width = 72
+    Alignment = taCenter
+    AutoSize = False
+    TabOrder = 2
+  end
+  object edtCurrentRXFreq: TEdit
+    Left = 45
+    Height = 21
+    Top = 128
+    Width = 72
+    Alignment = taCenter
+    AutoSize = False
+    TabOrder = 3
   end
 end

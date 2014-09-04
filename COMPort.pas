@@ -18,7 +18,7 @@ unit COMPort;
 //
 //  Ver: 1.0.0
 //
-//  Date: 22 Sep 2013
+//  Date: 31 Aug 2014
 //
 //========================================================================================
 
@@ -67,7 +67,8 @@ begin
     if gvstrCOMPort = '' then
       speCOMPort.Value := 1
     else
-      speCOMPort.Value := StrToInt(Copy(gvstrCOMPort,4, Length(gvstrCOMPort)));
+//      speCOMPort.Value := StrToInt(Copy(gvstrCOMPort,4, Length(gvstrCOMPort)));
+      speCOMPort.Value := StrToInt(gvstrCOMPort);
 end;// procedure TfrmCOMPort.FormShow
 
 //========================================================================================

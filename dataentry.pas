@@ -15,7 +15,7 @@ unit DataEntry;
 //         DataEntry_VHFMEM : DataEntry_VHFMEM_Init
 //                            DataEntry_VHFMEM_Save
 //         Main
-//         StepMessage : frmStepMEssage.Show
+//         StepMessage : frmStepMessage.Show
 //         Utilities : GetToneNrFromIndex
 //                     GetToneIndexFromToneNr
 //                     ValidVHFFrequency
@@ -32,7 +32,7 @@ unit DataEntry;
 //
 //  Ver: 1.0.0
 //
-//  Date: 86 Aug 2014
+//  Date: 1 Sep 2014
 //
 //========================================================================================
 
@@ -58,13 +58,13 @@ type
     chkDTSS: TCheckBox;
     cbxTones: TComboBox;
     cbxStep: TComboBox;
+    edtOffsetShift: TEdit;
     edtComments: TEdit;
     edtChannelName: TEdit;
     edtSource: TEdit;
     edtRXFrequency: TEdit;
     edtTXFrequency: TEdit;
     edtDTSSCode: TEdit;
-    edtOffsetShift: TEdit;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
@@ -93,6 +93,7 @@ type
     procedure bbtClearClick(Sender: TObject);
     procedure bbtResetClick(Sender: TObject);
     procedure bbtSaveClick(Sender: TObject);
+    procedure cbxStepChange(Sender: TObject);
     procedure chkDTSSChange(Sender: TObject);
     procedure edtChannelNameKeyPress(Sender: TObject; var Key: char);
     procedure edtCommentsKeyPress(Sender: TObject; var Key: char);
@@ -104,6 +105,7 @@ type
     procedure rbtNoTonesChange(Sender: TObject);
     procedure rbtPlusChange(Sender: TObject);
     procedure rbtSimplexChange(Sender: TObject);
+    procedure rbtUHFChange(Sender: TObject);
     procedure rbtVHFChange(Sender: TObject);
    private
     { private declarations }
@@ -127,6 +129,7 @@ type
 
 var
   frmDataEntry: TfrmDataEntry;
+  gvstrCorrectedFrequency : string;
 
 implementation
 
@@ -208,6 +211,14 @@ begin
 
     vsngTXFrequency := StrToFLoat(frmDataEntry.edtRXFrequency.Text);
 
+    // If Simplex is checked then we make the TX Frequency equal to the TX Frequency
+    // and Exit
+    if frmDataEntry.rbtSimplex.Checked then
+    begin
+      Result := frmDataEntry.edtRXFrequency.Text;
+      Exit;
+    end;// if frmDataEntry.rbtPlus.Checked
+
     // Calculate based on Band (UHF or VHF) and Shift (Simplex, Plus or Minus)
     if frmDataEntry.rbtVHF.Checked then
     begin
@@ -219,9 +230,9 @@ begin
     else
     begin
     if frmDataEntry.rbtPlus.Checked then
-      vsngTXFrequency := vsngTXFrequency + STrToFloat(gcstrUHFShiftOffset)
+      vsngTXFrequency := vsngTXFrequency + STrToFloat(gcstrUHFShiftOffsetA)
     else
-      vsngTXFrequency := vsngTXFrequency - STrToFloat(gcstrUHFShiftOffset);
+      vsngTXFrequency := vsngTXFrequency - STrToFloat(gcstrUHFShiftOffsetA);
     end;// if frmDataEntry.rbtVHF.Checked
 
     Result := Format('%-8.3f', [vsngTXFrequency]);
@@ -255,7 +266,7 @@ begin
       if frmDataEntry.rbtSimplex.Checked then
         frmDataEntry.edtOffsetShift.Text := gcstrNoShiftOffset
       else
-        frmDataEntry.edtOffsetShift.Text := gcstrUHFShiftOffset;
+        frmDataEntry.edtOffsetShift.Text := gcstrUHFShiftOffsetA;
     end;// if frmDataEntry.rbtVHF.Checked
 
     Exit;
@@ -319,7 +330,7 @@ begin
     if frmDataEntry.rbtSimplex.Checked then
       frmDataEntry.edtOffsetShift.Text := ''
     else
-      frmDataEntry.edtOffsetShift.Text := gcstrUHFShiftOffset;
+      frmDataEntry.edtOffsetShift.Text := gcstrUHFShiftOffsetA;
   end;// if frmDataEntry.rbtVHF.Checked
 
   frmDataEntry.edtTXFrequency.Text := frmDataEntry.CalculateTXFrequency;
@@ -348,9 +359,9 @@ begin
   if Length(frmDataEntry.edtTXFrequency.Text) = 0 then
   begin
     if frmDataEntry.rbtVHF.Checked then
-      frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrVHFStep)
+      frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrConfigVHFStep)
     else
-      frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrUHFStep);
+      frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrConfigUHFStep);
   end
   else
     ShowMessage('Non-Standard Step for Band');// if Length(frmDataEntry.edtTXFrequency.Text) = 0
@@ -385,9 +396,64 @@ procedure TFrmDataEntry.DisableDTSSCode;
 begin
 
   frmDataEntry.edtDTSSCode.Enabled := False;
-  frmDataEntry.edtDTSSCode.Color := clYellow;
+  frmDataEntry.edtDTSSCode.Color := $0080FFFF;
 
 end;// procedure DisableDTSSCode;
+
+//----------------------------------------------------------------------------------------
+procedure CalculateSteppedFrequency;
+var
+  vintFR1 : longint;
+  vintFR2 : longint;
+  vintOF1  : Integer;
+  vstrTStr : string;
+  vintStepValue : longint;
+  vbytTemp : byte;
+  vblnDone : boolean;begin
+
+  // First we get the slected Step and convert it to Hz
+  vstrTStr := frmDataEntry.cbxStep.Text;
+  vintStepValue := Trunc(StrToFloat(vstrTStr) * 1000);
+
+  // Now we convert the entered RX Frequency to Hz
+  vstrTStr := frmDataEntry.edtRXFrequency.Text;
+  vintFR1 := Trunc(StrToFloat(vstrTStr) * 1000000);
+
+  // Now calculate the new 'corrected' frequency by using the selected Step to create a
+  // Step Offset value that will be multiplied against the Step value to create a
+  // corrected frequency.
+  vintOF1 := vintFR1 DIV vintStepValue;
+  vintFR1 := vintStepValue * vintOF1;
+
+  // Check the lower limit for validity and change it if necessary
+  if frmDataEntry.rbtVHF.Checked then
+    if vintFR1 <= Trunc(gcsngMinVHFFrequency * 1000000) then
+      vintFR1 := Trunc(gcsngMinVHFFrequency * 1000000)
+  else
+    if vintFR1 <= Trunc(gcsngMinUHFFrequency * 1000000) then
+      vintFR1 := Trunc(gcsngMinUHFFrequency * 1000000);
+
+  // Now we convert the corrected frequency to a string
+  gvstrCorrectedFrequency := Copy(IntToStr(vintFR1),1,3) +
+              '.' +
+              Copy(IntToStr(vintFR1),4,Length(vstrTStr));
+
+  //  and remove trailing zeros
+  vblnDone := False;
+  repeat
+    vbytTemp := Length(gvstrCorrectedFrequency);
+    if vbytTemp > 7 then
+    begin
+      if gvstrCorrectedFrequency[vbytTemp] = '0' then
+        gvstrCorrectedFrequency := Copy(gvstrCorrectedFrequency,1,vbytTemp-1)
+      else
+        vblnDone := True;// if vstrTStr[vbytTemp] = '0'
+    end
+    else
+      vblnDone := True;// if vbytTemp > 7 then
+  until vblnDone;
+
+end;// procedure CalculateSteppedFrequency;
 
 //========================================================================================
 //     FORM ROUTINES
@@ -706,9 +772,57 @@ end;// procedure TfrmDataEntry.edtCommentsKeyPress
 //========================================================================================
 procedure TfrmDataEntry.rbtVHFChange(Sender: TObject);
 begin
-  SetShiftOffset;
-  SetStepValue;
-end;//procedure TfrmDataEntry.rbtVHFChange(
+
+  // Changes are only allowed if the button has been checked and the RXFrequency edit box
+  // contains a valid VHF Frequency
+  if frmDataEntry.rbtVHF.Checked then
+  begin
+
+    if (Length (frmDataEntry.edtRXFrequency.Text) > 0) and
+               (not ValidVHFFrequency(frmDataEntry.edtRXFrequency.Text)) then
+    begin
+      ShowMessage('Invalid VHF Frequency');
+      // Allow a Frequency change here
+//      frmDataEntry.edtRXFrequency.Text := '';
+//      frmDataEntry.rbtUHF.Checked := True;
+//      frmMain.SetFocus;
+//      Exit;
+    end;// if (not ValidVHFFrequency(frmDataEntry.edtRXFrequency.Text))
+
+//    frmDataEntry.rbtVHF.Checked := True;
+    SetShiftOffset;
+    SetStepValue;
+
+  end;// if frmDataEntry.rbtVHF.Checked
+
+end;//procedure TfrmDataEntry.rbtVHFChange
+
+//----------------------------------------------------------------------------------------
+procedure TfrmDataEntry.rbtUHFChange(Sender: TObject);
+begin
+
+    // Changes are only allowed if the button has been checked
+    if frmDataEntry.rbtUHF.Checked then
+    begin
+
+      if (Length (frmDataEntry.edtRXFrequency.Text) > 0) and
+                 (not ValidUHFFrequency(frmDataEntry.edtRXFrequency.Text)) then
+      begin
+        ShowMessage('Invalid UHF Frequency');
+          // Allow a Frequency change here
+//        frmDataEntry.edtRXFrequency.Text := '';
+//        frmDataEntry.rbtVHF.Checked := True;
+//        frmMain.SetFocus;
+//        Exit;
+      end;// if (not ValidUHFFrequency(frmDataEntry.edtRXFrequency.Text))
+
+//      frmDataEntry.rbtUHF.Checked := True;
+      SetShiftOffset;
+      SetStepValue;
+
+    end;// if frmDataEntry.rbtUHF.Checked
+
+end;// procedure TfrmDataEntry.rbtUHFChange
 
 //----------------------------------------------------------------------------------------
 procedure TfrmDataEntry.rbtSimplexChange(Sender: TObject);
@@ -727,6 +841,19 @@ procedure TfrmDataEntry.rbtMinusChange(Sender: TObject);
 begin
   SetShiftOffset;
 end;// rocedure TfrmDataEntry.rbtMinusChange
+
+//----------------------------------------------------------------------------------------
+procedure TfrmDataEntry.cbxStepChange(Sender: TObject);
+begin
+
+  // Now we Calculate the "Stepped" RX Frequency
+  CalculateSteppedFrequency;
+  // If the RXFrequency is not correct, then display the warning message and allow it
+  // to be corrected.
+  if edtRXFrequency.Text <> gvstrCorrectedFrequency then
+    frmStepMessage.ShowModal;
+
+end;// procedure TfrmDataEntry.cbxStepChange
 
 //----------------------------------------------------------------------------------------
 procedure TfrmDataEntry.rbtNoTonesChange(Sender: TObject);
@@ -761,51 +888,21 @@ end;// procedure TfrmDataEntry.chkDTSSChange
 procedure TfrmDataEntry.edtRXFrequencyExit(Sender: TObject);
 begin
 
-  // Check for Valid Frequency
-  if rbtVHF.Checked then
+  if (not ValidVHFFrequency(edtRXFrequency.Text)) and
+     (not ValidUHFFrequency(edtRXFrequency.Text)) then
   begin
-    if not ValidVHFFrequency(edtRXFrequency.Text) then
-    begin
-      ShowMessage(cstrInvalidVHFFrequencyMsg);
-      Exit;
-    end
-  end
-  else
-  begin
-    if not ValidUHFFrequency(edtRXFrequency.Text) then
-    begin
-      ShowMessage(cstrInvalidUHFFrequencyMsg);
-      Exit;
-    end;
-  end;// if rbtVHF.Checked
+    showmessage('Invalid Frequency');
+    Exit;
+  end;
 
-  // Frequency is valid so now we check against the Step value
-  if rbtVHF.Checked then
-  begin
-    // If VHF then Step should be 5 kHz or gcstrVHFStep Item Index 0
-    if not (IntToStr(cbxStep.ItemIndex) = gcstrVHFStep) then
-    begin
-      ShowMessage(cstrInvalidVHFStepMsg);
-      frmStepMessage.Show;
-      Exit;
-    end
-  end
-  else
-  begin
-    showmessage(IntToStr(cbxStep.ItemIndex));
-    // If UHF then Step should be 25 kHz or gcstrUHFStep Item Index 6
-    if not (IntToStr(cbxStep.ItemIndex) = gcstrUHFStep) then
-    begin
-      ShowMessage(cstrInvalidUHFStepMsg);
-      frmStepMessage.Show;
-      Exit;
-    end;
-  end;// if rbtVHF.Checked
+  // Now we Calculate the "Stepped" RX Frequency
+  CalculateSteppedFrequency;
+  // If the RXFrequency is not correct, then display the warning message and allow it
+  // to be corrected.
+  if edtRXFrequency.Text <> gvstrCorrectedFrequency then
+    frmStepMessage.ShowModal;
 
-  // Now we Calculate the "Stepped" RX Frequency if necessary
-
-
-
+  // Now we calculate the TX Frequency
   edtTXFrequency.Text := CalculateTXFrequency;
 
 end;// procedure TfrmDataEntry.edtRXFrequencyExit

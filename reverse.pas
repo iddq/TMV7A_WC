@@ -127,7 +127,7 @@ begin
 
     // Now we calculate a Reversed RXFrequency based on the Original Shift
     vsngTFrequency := StrToFloat( gvstrUHFRXFrequency );
-    vsngTOffset := StrToFloat(gcstrUHFShiftOffset);
+    vsngTOffset := StrToFloat(gcstrUHFShiftOffsetA);
     if gvstrUHFOrigShift = gcstrShiftPlus then
     begin
      vsngTFrequency := vsngTFrequency + 5000000;

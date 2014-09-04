@@ -9,12 +9,13 @@ unit ColourSchemes;
 //  Calls: AppVariables
 //         Main
 //
-//  Called By: Init : Initialize
+//  Called By: Configure : ShowColourScheme
+//             Init : Initialize
 //             Main : TfrmMain.mnuConfigColourScheme1Click
 //
 //  Ver: 1.0.0
 //
-//  Date: 16 Jul
+//  Date: 27 Aug 2014
 //
 //========================================================================================
 
@@ -26,6 +27,32 @@ uses
   AppVariables;
 
 procedure SetColourScheme (vstrColourScheme : String);
+
+const
+  vclrBackColor1 = $00FF8000;
+  vclrForeColor1 = clWhite;
+  vclrBackColor2 = clWhite;
+  vclrForeColor2 = $00FF8000;
+
+  vclrBackColor3 = $00FF8000;
+  vclrForeColor3 = clYellow;
+  vclrBackColor4 = clYellow;
+  vclrForeColor4 = $00FF8000;
+
+  vclrBackColor5 = clBlack;
+  vclrForeColor5 = $005EAEFF;
+  vclrBackColor6 = $005EAEFF;
+  vclrForeColor6 = clBlack;
+
+  vclrBackColor7 = clBlack;
+  vclrForeColor7 = $0000B900;
+  vclrBackColor8 = $0000B900;
+  vclrForeColor8 = clBlack;
+
+  vclrBackColor9 = clBlack;
+  vclrForeColor9 = clWhite;
+  vclrBackColor10 = clWhite;
+  vclrForeColor10 = clBlack;
 
 implementation
 
@@ -41,7 +68,7 @@ begin
 
   gvstrCurrentColourScheme := vstrColourScheme;
 
-  frmMain.mnuConfigColourScheme1.Checked := False;
+{  frmMain.mnuConfigColourScheme1.Checked := False;
   frmMain.mnuConfigColourScheme2.Checked := False;
   frmMain.mnuConfigColourScheme3.Checked := False;
   frmMain.mnuConfigColourScheme4.Checked := False;
@@ -50,58 +77,58 @@ begin
   frmMain.mnuConfigColourScheme7.Checked := False;
   frmMain.mnuConfigColourScheme8.Checked := False;
   frmMain.mnuConfigColourScheme9.Checked := False;
-  frmMain.mnuConfigColourScheme10.Checked := False;
+  frmMain.mnuConfigColourScheme10.Checked := False; }
 
   case vstrColourScheme of
     '1' : Begin
-          vclrBackColor := $00FF8000;
-          vclrForeColor := clWhite;
-          frmMain.mnuConfigColourScheme1.Checked := True;
+          vclrBackColor := vclrBackColor1;
+          vclrForeColor := vclrForeColor1;
+//          frmMain.mnuConfigColourScheme1.Checked := True;
         end;
     '2' : Begin
-          vclrBackColor := clWhite;
-          vclrForeColor := $00FF8000;
-          frmMain.mnuConfigColourScheme2.Checked := True;
+          vclrBackColor := vclrBackColor2;
+          vclrForeColor := vclrForeColor2;
+//          frmMain.mnuConfigColourScheme2.Checked := True;
         end;
     '3' : Begin
-          vclrBackColor := $00FF8000;
-          vclrForeColor := clYellow;
-          frmMain.mnuConfigColourScheme3.Checked := True;
+          vclrBackColor := vclrBackColor3;
+          vclrForeColor := vclrForeColor3;
+//          frmMain.mnuConfigColourScheme3.Checked := True;
         end;
     '4' : Begin
-          vclrBackColor := clYellow;
-          vclrForeColor := $00FF8000;
-          frmMain.mnuConfigColourScheme4.Checked := True;
+          vclrBackColor := vclrBackColor4;
+          vclrForeColor := vclrForeColor4;
+//          frmMain.mnuConfigColourScheme4.Checked := True;
         end;
     '5' : Begin
-          vclrBackColor := $005EAEFF;
-          vclrForeColor := clBlack;
-          frmMain.mnuConfigColourScheme5.Checked := True;
+          vclrBackColor := vclrBackColor5;
+          vclrForeColor := vclrForeColor5;
+//          frmMain.mnuConfigColourScheme5.Checked := True;
         end;
     '6' : Begin
-          vclrBackColor := clBlack;
-          vclrForeColor := $005EAEFF;
-          frmMain.mnuConfigColourScheme6.Checked := True;
+          vclrBackColor := vclrBackColor6;
+          vclrForeColor := vclrForeColor6;
+//          frmMain.mnuConfigColourScheme6.Checked := True;
         end;
     '7' : Begin
-          vclrBackColor := $0000B900;
-          vclrForeColor := clBlack;
-          frmMain.mnuConfigColourScheme7.Checked := True;
+          vclrBackColor := vclrBackColor7;
+          vclrForeColor := vclrForeColor7;
+//          frmMain.mnuConfigColourScheme7.Checked := True;
         end;
     '8' : Begin
-          vclrBackColor := clBlack;
-          vclrForeColor := $0000B900;
-          frmMain.mnuConfigColourScheme8.Checked := True;
+          vclrBackColor := vclrBackColor8;
+          vclrForeColor := vclrForeColor8;
+//          frmMain.mnuConfigColourScheme8.Checked := True;
         end;
     '9' : Begin
-          vclrBackColor := clWhite;
-          vclrForeColor := clBlack;
-          frmMain.mnuConfigColourScheme9.Checked := True;
+          vclrBackColor := vclrBackColor9;
+          vclrForeColor := vclrForeColor9;
+//          frmMain.mnuConfigColourScheme9.Checked := True;
         end;
     '10' : Begin
-          vclrBackColor := clBlack;
-          vclrForeColor := clWhite;
-          frmMain.mnuConfigColourScheme10.Checked := True;
+          vclrBackColor := vclrBackColor10;
+          vclrForeColor := vclrForeColor10;
+//          frmMain.mnuConfigColourScheme10.Checked := True;
         end;
   end;// case vstrColourScheme
 

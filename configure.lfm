@@ -1,0 +1,394 @@
+object frmConfigure: TfrmConfigure
+  Left = 329
+  Height = 396
+  Top = 146
+  Width = 454
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = 'Configure TMV7 Default Values'
+  ClientHeight = 396
+  ClientWidth = 454
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  LCLVersion = '1.2.4.0'
+  object bbtSave: TBitBtn
+    Left = 288
+    Height = 30
+    Top = 336
+    Width = 75
+    Caption = '&Save'
+    Default = True
+    Kind = bkOK
+    ModalResult = 1
+    OnClick = bbtSaveClick
+    TabOrder = 0
+  end
+  object GroupBox1: TGroupBox
+    Left = 16
+    Height = 104
+    Top = 16
+    Width = 176
+    Caption = '[ COM Port ]'
+    ClientHeight = 86
+    ClientWidth = 172
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 16
+      Height = 13
+      Top = 9
+      Width = 78
+      Caption = 'Select COM Port'
+      ParentColor = False
+    end
+    object sedCOMPort: TSpinEdit
+      Left = 120
+      Height = 21
+      Top = 5
+      Width = 40
+      MaxValue = 32
+      MinValue = 1
+      TabOrder = 0
+      Value = 1
+    end
+    object Label2: TLabel
+      Left = 16
+      Height = 13
+      Top = 56
+      Width = 82
+      Caption = 'Select Baud Rate'
+      ParentColor = False
+    end
+    object rbt1200: TRadioButton
+      Left = 120
+      Height = 17
+      Top = 40
+      Width = 42
+      Caption = '1200'
+      TabOrder = 1
+    end
+    object rbt9600: TRadioButton
+      Left = 120
+      Height = 17
+      Top = 64
+      Width = 42
+      Caption = '9600'
+      TabOrder = 2
+    end
+  end
+  object bbtCancel: TBitBtn
+    Left = 88
+    Height = 30
+    Top = 336
+    Width = 75
+    Cancel = True
+    DefaultCaption = True
+    Kind = bkCancel
+    ModalResult = 2
+    OnClick = bbtCancelClick
+    TabOrder = 2
+  end
+  object GroupBox2: TGroupBox
+    Left = 16
+    Height = 73
+    Top = 136
+    Width = 176
+    Caption = '[ UHF Repeater Offset ]'
+    ClientHeight = 55
+    ClientWidth = 172
+    TabOrder = 3
+    object rbt5MHz: TRadioButton
+      Left = 39
+      Height = 17
+      Top = 9
+      Width = 75
+      Caption = '5 MHz ((US)'
+      TabOrder = 0
+    end
+    object rbt16MHz: TRadioButton
+      Left = 39
+      Height = 17
+      Top = 32
+      Width = 81
+      Caption = '1.6 MHz (UK)'
+      TabOrder = 1
+    end
+  end
+  object GroupBox3: TGroupBox
+    Left = 16
+    Height = 88
+    Top = 224
+    Width = 176
+    Caption = '[ Frequency Step in kHz ]'
+    ClientHeight = 70
+    ClientWidth = 172
+    TabOrder = 4
+    object Label3: TLabel
+      Left = 24
+      Height = 13
+      Top = 45
+      Width = 20
+      Caption = 'UHF'
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 24
+      Height = 13
+      Top = 16
+      Width = 19
+      Caption = 'VHF'
+      ParentColor = False
+    end
+    object cbxDefVHFStep: TComboBox
+      Left = 64
+      Height = 21
+      Top = 10
+      Width = 60
+      AutoSize = False
+      ItemHeight = 13
+      TabOrder = 0
+    end
+    object cbxDefUHFStep: TComboBox
+      Left = 64
+      Height = 21
+      Top = 40
+      Width = 60
+      AutoSize = False
+      ItemHeight = 13
+      TabOrder = 1
+    end
+  end
+  object GroupBox5: TGroupBox
+    Left = 208
+    Height = 296
+    Top = 16
+    Width = 224
+    Caption = '[ Colour Schemes ]'
+    ClientHeight = 278
+    ClientWidth = 220
+    TabOrder = 5
+    object rbtColourScheme1: TRadioButton
+      Left = 16
+      Height = 20
+      Top = 5
+      Width = 25
+      Caption = '1'
+      Color = clYellow
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnChange = rbtColourScheme1Change
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 0
+    end
+    object rbtColourScheme2: TRadioButton
+      Left = 16
+      Height = 20
+      Top = 29
+      Width = 25
+      Caption = '2'
+      Color = clYellow
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnChange = rbtColourScheme2Change
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 1
+    end
+    object rbtColourScheme3: TRadioButton
+      Left = 16
+      Height = 20
+      Top = 53
+      Width = 25
+      Caption = '3'
+      Color = clYellow
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnChange = rbtColourScheme3Change
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 2
+    end
+    object rbtColourScheme4: TRadioButton
+      Left = 16
+      Height = 20
+      Top = 77
+      Width = 25
+      Caption = '4'
+      Color = clYellow
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnChange = rbtColourScheme4Change
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 3
+    end
+    object rbtColourScheme5: TRadioButton
+      Left = 16
+      Height = 20
+      Top = 101
+      Width = 25
+      Caption = '5'
+      Color = clYellow
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnChange = rbtColourScheme5Change
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 4
+    end
+    object rbtColourScheme6: TRadioButton
+      Left = 16
+      Height = 20
+      Top = 125
+      Width = 25
+      Caption = '6'
+      Color = clYellow
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnChange = rbtColourScheme6Change
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 5
+    end
+    object rbtColourScheme7: TRadioButton
+      Left = 16
+      Height = 20
+      Top = 149
+      Width = 25
+      Caption = '7'
+      Color = clYellow
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnChange = rbtColourScheme7Change
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 6
+    end
+    object rbtColourScheme8: TRadioButton
+      Left = 16
+      Height = 20
+      Top = 173
+      Width = 25
+      Caption = '8'
+      Color = clYellow
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnChange = rbtColourScheme8Change
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 7
+    end
+    object rbtColourScheme9: TRadioButton
+      Left = 16
+      Height = 20
+      Top = 200
+      Width = 25
+      Caption = '9'
+      Color = clYellow
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnChange = rbtColourScheme9Change
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 8
+    end
+    object Panel1: TPanel
+      Left = 56
+      Height = 186
+      Top = 34
+      Width = 154
+      ClientHeight = 186
+      ClientWidth = 154
+      Color = clBlue
+      ParentColor = False
+      TabOrder = 9
+      object lblFrequency: TLabel
+        Left = 23
+        Height = 39
+        Top = 24
+        Width = 112
+        Caption = '146.520'
+        Font.Color = clWhite
+        Font.Height = -32
+        ParentColor = False
+        ParentFont = False
+      end
+      object lblText1: TLabel
+        Left = 16
+        Height = 23
+        Top = 80
+        Width = 126
+        Caption = 'Colour Scheme'
+        Font.Color = clWhite
+        Font.Height = -19
+        ParentColor = False
+        ParentFont = False
+      end
+    end
+    object rbtColourScheme10: TRadioButton
+      Left = 16
+      Height = 20
+      Top = 224
+      Width = 32
+      Caption = '10'
+      Color = clYellow
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnChange = rbtColourScheme10Change
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 10
+    end
+  end
+  object bbtReset: TBitBtn
+    Left = 192
+    Height = 30
+    Top = 336
+    Width = 75
+    Caption = '&reset'
+    Kind = bkRetry
+    ModalResult = 4
+    OnClick = bbtResetClick
+    TabOrder = 6
+  end
+end

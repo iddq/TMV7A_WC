@@ -14,7 +14,7 @@ unit Init;
 //         BYCommand : GetUHFBYStatus
 //                     GetVHFBYStatus
 //         ColourSchemse : SetColourScheme
-//         COMPort : SendCommand
+//         Configure : frmConfigure.Show
 //         HUtils : InfoMessageDlgOk
 //         INIStuff : ReadINIFile
 //                    Variables
@@ -26,6 +26,8 @@ unit Init;
 //         Main
 //         NagScreen
 //         PSCommand : TogglePowerOnOff
+//         SerialStuff : OpenPort
+//                       SendCommand
 //         SMCommand : GetVHF_SMValue
 //                     GetUHF_SMValue
 //         SQCommand : SetVHF_SQValue
@@ -39,7 +41,7 @@ unit Init;
 //
 //  Ver: 1.0.0
 //
-//  Date: 2 Aug 2014 2013
+//  Date: 31 Aug 2014
 //
 //========================================================================================
 
@@ -48,9 +50,9 @@ interface
 uses
   Classes, Forms, SysUtils, Dialogs, HUtils,
   // Application units
-  AGCommand, AppConstants, AppVariables, BUFCommand, BYCommand, ColourSchemes, COMPort,
-  DataEntry, INIStuff, LCDDisplay, NagScreen, SerialStuff, SMCommand, SQCommand,
-  StatusBar, TMVFiles;
+  AGCommand, AppConstants, AppVariables, BUFCommand, BYCommand, ColourSchemes, {COMPort,}
+  Configure, DataEntry, INIStuff, LCDDisplay, NagScreen, SerialStuff, SMCommand,
+  SQCommand, StatusBar, TMVFiles;
 
 function Initialize : boolean;
 procedure TMV7_Init;
@@ -112,7 +114,7 @@ End;// InitToneFrequencyArray
 
 Procedure InitStepArray;
 Begin
-   gvstrStepArray[0] := '5';
+  { gvstrStepArray[0] := '5';
    gvstrStepArray[1] := '6.25';
    gvstrStepArray[2] := '10';
    gvstrStepArray[3] := '12.5';
@@ -120,7 +122,7 @@ Begin
    gvstrStepArray[5] := '20';
    gvstrStepArray[6] := '25';
    gvstrStepArray[7] := '30';
-   gvstrStepArray[8] := '50';
+   gvstrStepArray[8] := '50'; }
 
  End;// InitStepArray
 
@@ -139,6 +141,9 @@ begin
   GetDir(0, gvstrAppPath);
   gvstrAppPath := gvstrAppPath + '\';
 
+  // Load the INI data variables
+  ReadINIFile;
+
   // Check to see if the TMV7Files directory exists. If it doesn't, we create it
   if not DirectoryExists (gcstrTMV7FileDir) then
   begin
@@ -154,10 +159,13 @@ begin
       Exit;
     end;//if not CreateDir (gcstrTMV7FileDir
 
+    // Now we do the initial program confoguration
+    frmConfigure.ShowModal;
+
   end;//if not DirectoryExists (gcstrTMV7FileDir)
 
-  // Load the INI data variables
-  ReadINIFile;
+{  // Load the INI data variables
+  ReadINIFile; }
 
   // Init Tones
   InitToneFrequencyArray;

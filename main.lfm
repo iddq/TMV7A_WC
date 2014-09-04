@@ -1,13 +1,13 @@
 object frmMain: TfrmMain
-  Left = 307
+  Left = 56
   Height = 405
-  Top = 137
-  Width = 841
+  Top = 96
+  Width = 843
   HelpContext = 1000
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   ClientHeight = 385
-  ClientWidth = 841
+  ClientWidth = 843
   Color = clBtnFace
   Font.CharSet = ANSI_CHARSET
   Font.Color = clBlack
@@ -52,7 +52,7 @@ object frmMain: TfrmMain
     Left = 0
     Height = 23
     Top = 362
-    Width = 841
+    Width = 843
     AutoSize = False
     Panels = <    
       item
@@ -97,7 +97,7 @@ object frmMain: TfrmMain
     Left = 0
     Height = 26
     Top = 0
-    Width = 841
+    Width = 843
     Caption = 'ToolBar1'
     EdgeBorders = [ebTop, ebBottom]
     Images = ImageList1
@@ -1765,64 +1765,7 @@ object frmMain: TfrmMain
     end
     object mnuConfigure: TMenuItem
       Caption = '&Configure'
-      object mnuConfigCOMPort: TMenuItem
-        Caption = 'COM Port'
-        object mnuConfigSelectPort: TMenuItem
-          Caption = 'Select Port ...'
-          OnClick = mnuConfigSelectPortClick
-        end
-        object mnuConfigOpenPort: TMenuItem
-          Caption = 'Open Port'
-          OnClick = mnuConfigOpenPortClick
-        end
-        object mnuConfigClosePort: TMenuItem
-          Caption = 'Close Port'
-          OnClick = mnuConfigClosePortClick
-        end
-      end
-      object mnuConfigColourSchemes: TMenuItem
-        Caption = 'Colour Schemes'
-        object mnuConfigColourScheme1: TMenuItem
-          Caption = 'Colour Scheme 1'
-          OnClick = mnuConfigColourScheme1Click
-        end
-        object mnuConfigColourScheme2: TMenuItem
-          Caption = 'Colour Scheme 2'
-          OnClick = mnuConfigColourScheme2Click
-        end
-        object mnuConfigColourScheme3: TMenuItem
-          Caption = 'Colour Scheme 3'
-          OnClick = mnuConfigColourScheme3Click
-        end
-        object mnuConfigColourScheme4: TMenuItem
-          Caption = 'Colour Scheme 4'
-          OnClick = mnuConfigColourScheme4Click
-        end
-        object mnuConfigColourScheme5: TMenuItem
-          Caption = 'Colour Scheme 5'
-          OnClick = mnuConfigColourScheme5Click
-        end
-        object mnuConfigColourScheme6: TMenuItem
-          Caption = 'Colour Scheme 6'
-          OnClick = mnuConfigColourScheme6Click
-        end
-        object mnuConfigColourScheme7: TMenuItem
-          Caption = 'Colour Scheme 7'
-          OnClick = mnuConfigColourScheme7Click
-        end
-        object mnuConfigColourScheme8: TMenuItem
-          Caption = 'Colour Scheme 8'
-          OnClick = mnuConfigColourScheme8Click
-        end
-        object mnuConfigColourScheme9: TMenuItem
-          Caption = 'Colour Scheme 9'
-          OnClick = mnuConfigColourScheme9Click
-        end
-        object mnuConfigColourScheme10: TMenuItem
-          Caption = 'Colour Scheme 10'
-          OnClick = mnuConfigColourScheme10Click
-        end
-      end
+      OnClick = mnuConfigureClick
     end
     object mnuVFO: TMenuItem
       Caption = 'VFO'

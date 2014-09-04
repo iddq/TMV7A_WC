@@ -15,7 +15,7 @@ uses
   RXCommand, TXCommand, Mute, MEM, dataentry_vhfmem, MEM_VHF, MEM_UHF, MEM_DTMF,
   TMVFiles_DTMF, TMVFiles_UHF, TMVFiles_VHF, TMVFiles_FAV, DataEntry_UHFMem,
   Register, SplashAbout, NagScreen, HUtils, Reverse, PCCommand, TMVFileReport,
-  StepMessage;
+  StepMessage, Configure;
 
 {$R *.res}
 
@@ -31,6 +31,7 @@ begin
   Application.CreateForm(TdlgNagScreen, dlgNagScreen);
   Application.CreateForm(TfrmTMVFileReport, frmTMVFileReport);
   Application.CreateForm(TfrmStepMessage, frmStepMessage);
+  Application.CreateForm(TfrmConfigure, frmConfigure);
   Application.Run;
 end.
 

@@ -14,6 +14,7 @@ unit Main;
 //          BCCommand
 //          ColourSchemes : SetColourScheme
 //          COMPort
+//          Configure : frmConfigure.ShowModal
 //          DataEntry : TfrmDataEntry.bbtSaveClick
 //          Fav : SetFavChannel(n)
 //          Final : Finalize
@@ -56,7 +57,7 @@ unit Main;
 //
 //  Ver: 1.0.0
 //
-//  Date: 24 Apr 2014
+//  Date: 24 Aug 2014
 //
 //========================================================================================
 
@@ -69,8 +70,8 @@ uses
   LR_DSet,
   // Application units
   AGCommand, AppConstants, AppVariables, AppTypes, BCCommand, ColourSchemes, COMPort,
-  DataEntry, Fav, Final, Init, Mem, Mute, PCCommand, PSCommand, Register, ResponseParser,
-  Reverse, SplashAbout, SQCommand, StatusBar, TMVFileReport, TMVFiles;
+  Configure, DataEntry, Fav, Final, Init, Mem, Mute, PCCommand, PSCommand, Register,
+  ResponseParser, Reverse, SplashAbout, SQCommand, StatusBar, TMVFileReport, TMVFiles;
 
 type
 
@@ -127,23 +128,10 @@ type
     lblUHFTCT: TLabel;
     lblUHFTCTFreq: TLabel;
     MainMenu1: TMainMenu;
-    mnuConfigClosePort: TMenuItem;
-    mnuConfigOpenPort: TMenuItem;
-    mnuConfigSelectPort: TMenuItem;
     mnuFilePrintTMVFileReport: TMenuItem;
     mnuMemDTMF: TMenuItem;
     mnuMemUHF: TMenuItem;
     mnuMemVHF: TMenuItem;
-    mnuConfigColourScheme1: TMenuItem;
-    mnuConfigColourScheme10: TMenuItem;
-    mnuConfigColourScheme2: TMenuItem;
-    mnuConfigColourScheme3: TMenuItem;
-    mnuConfigColourScheme4: TMenuItem;
-    mnuConfigColourScheme5: TMenuItem;
-    mnuConfigColourScheme6: TMenuItem;
-    mnuConfigColourScheme7: TMenuItem;
-    mnuConfigColourScheme8: TMenuItem;
-    mnuConfigColourScheme9: TMenuItem;
     mnuFileSave: TMenuItem;
     mnuFileNew: TMenuItem;
     mnuHelpAbout: TMenuItem;
@@ -154,8 +142,6 @@ type
     mnuVFOUHF: TMenuItem;
     mnuVFOVHF: TMenuItem;
     mnuVFO: TMenuItem;
-    mnuConfigColourSchemes: TMenuItem;
-    mnuConfigCOMPort: TMenuItem;
     mnuConfigure: TMenuItem;
     mnuFileSep2: TMenuItem;
     mnuFilePrint: TMenuItem;
@@ -221,20 +207,21 @@ type
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormShow(Sender: TObject);
-    procedure mnuConfigClosePortClick(Sender: TObject);
-    procedure mnuConfigOpenPortClick(Sender: TObject);
-    procedure mnuConfigSelectPortClick(Sender: TObject);
+    procedure mnuConfigureClick(Sender: TObject);
+//    procedure mnuConfigClosePortClick(Sender: TObject);
+//    procedure mnuConfigOpenPortClick(Sender: TObject);
+//    procedure mnuConfigSelectPortClick(Sender: TObject);
     procedure mnuFilePrintTMVFileReportClick(Sender: TObject);
-    procedure mnuConfigColourScheme10Click(Sender: TObject);
-    procedure mnuConfigColourScheme1Click(Sender: TObject);
-    procedure mnuConfigColourScheme2Click(Sender: TObject);
-    procedure mnuConfigColourScheme3Click(Sender: TObject);
-    procedure mnuConfigColourScheme4Click(Sender: TObject);
-    procedure mnuConfigColourScheme5Click(Sender: TObject);
-    procedure mnuConfigColourScheme6Click(Sender: TObject);
-    procedure mnuConfigColourScheme7Click(Sender: TObject);
-    procedure mnuConfigColourScheme8Click(Sender: TObject);
-    procedure mnuConfigColourScheme9Click(Sender: TObject);
+//    procedure mnuConfigColourScheme10Click(Sender: TObject);
+//    procedure mnuConfigColourScheme1Click(Sender: TObject);
+//    procedure mnuConfigColourScheme2Click(Sender: TObject);
+//    procedure mnuConfigColourScheme3Click(Sender: TObject);
+//    procedure mnuConfigColourScheme4Click(Sender: TObject);
+//    procedure mnuConfigColourScheme5Click(Sender: TObject);
+//    procedure mnuConfigColourScheme6Click(Sender: TObject);
+//    procedure mnuConfigColourScheme7Click(Sender: TObject);
+//    procedure mnuConfigColourScheme8Click(Sender: TObject);
+//    procedure mnuConfigColourScheme9Click(Sender: TObject);
     procedure mnuFileExitClick(Sender: TObject);
     procedure mnuFileNewClick(Sender: TObject);
     procedure mnuFileOpenClick(Sender: TObject);
@@ -417,82 +404,87 @@ end;//procedure TfrmMain.mnuFileExitClick
 //----------------------------------------------------------------------------------------
 //          CONFIGURE MENU
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigSelectPortClick(Sender: TObject);
+procedure TfrmMain.mnuConfigureClick(Sender: TObject);
+begin
+  frmConfigure.ShowModal;
+end;// procedure TfrmMain.mnuConfigureClick(
+
+{procedure TfrmMain.mnuConfigSelectPortClick(Sender: TObject);
 begin
   frmCOMPort.ShowModal;
-end;// procedure TfrmMain.mnuConfigureSelectPortClick
+end;// procedure TfrmMain.mnuConfigureSelectPortClick }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigOpenPortClick(Sender: TObject);
+{procedure TfrmMain.mnuConfigOpenPortClick(Sender: TObject);
 begin
 
-end;// procedure TfrmMain.mnuConfigureOpenPortClick
+end;// procedure TfrmMain.mnuConfigureOpenPortClick  }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigClosePortClick(Sender: TObject);
+{procedure TfrmMain.mnuConfigClosePortClick(Sender: TObject);
 begin
 
-end;// procedure TfrmMain.mnuConfigureClosePortClick
+end;// procedure TfrmMain.mnuConfigureClosePortClick }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigColourScheme1Click(Sender: TObject);
+{procedure TfrmMain.mnuConfigColourScheme1Click(Sender: TObject);
 begin
   SetColourScheme('1');
-end;// procedure TfrmMain.mnuConfigColourScheme1Click
+end;// procedure TfrmMain.mnuConfigColourScheme1Click }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigColourScheme2Click(Sender: TObject);
+{procedure TfrmMain.mnuConfigColourScheme2Click(Sender: TObject);
 begin
   SetColourScheme('2');
-end;// TfrmMain.mnuConfigColourScheme2Click
+end;// TfrmMain.mnuConfigColourScheme2Click }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigColourScheme3Click(Sender: TObject);
+{procedure TfrmMain.mnuConfigColourScheme3Click(Sender: TObject);
 begin
   SetColourScheme('3');
-end;// TfrmMain.mnuConfigColourScheme3Click
+end;// TfrmMain.mnuConfigColourScheme3Click }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigColourScheme4Click(Sender: TObject);
+{procedure TfrmMain.mnuConfigColourScheme4Click(Sender: TObject);
 begin
   SetColourScheme('4');
-end;// TfrmMain.mnuConfigColourScheme4Click
+end;// TfrmMain.mnuConfigColourScheme4Click }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigColourScheme5Click(Sender: TObject);
+{procedure TfrmMain.mnuConfigColourScheme5Click(Sender: TObject);
 begin
   SetColourScheme('5');
-end;
+end;     }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigColourScheme6Click(Sender: TObject);
+{{procedure TfrmMain.mnuConfigColourScheme6Click(Sender: TObject);
 begin
   SetColourScheme('6');
-end;// TfrmMain.mnuConfigColourScheme5Click
+end;// TfrmMain.mnuConfigColourScheme5Click  }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigColourScheme7Click(Sender: TObject);
+{procedure TfrmMain.mnuConfigColourScheme7Click(Sender: TObject);
 begin
   SetColourScheme('7');
-end;// TfrmMain.mnuConfigColourScheme7Click
+end;// TfrmMain.mnuConfigColourScheme7Click  }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigColourScheme8Click(Sender: TObject);
+{procedure TfrmMain.mnuConfigColourScheme8Click(Sender: TObject);
 begin
   SetColourScheme('8');
-end;// TfrmMain.mnuConfigColourScheme8Click
+end;// TfrmMain.mnuConfigColourScheme8Click  }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigColourScheme9Click(Sender: TObject);
+{procedure TfrmMain.mnuConfigColourScheme9Click(Sender: TObject);
 begin
   SetColourScheme('9');
-end;// TfrmMain.mnuConfigColourScheme9Click
+end;// TfrmMain.mnuConfigColourScheme9Click  }
 
 //----------------------------------------------------------------------------------------
-procedure TfrmMain.mnuConfigColourScheme10Click(Sender: TObject);
+{procedure TfrmMain.mnuConfigColourScheme10Click(Sender: TObject);
 begin
   SetColourScheme('10');
-end;// TfrmMain.mnuConfigColourScheme10Click
+end;// TfrmMain.mnuConfigColourScheme10Click  }
 
 //----------------------------------------------------------------------------------------
 //          VFO MENU

@@ -19,7 +19,7 @@ unit dataentry_vhfmem;
 //
 //  Ver: 1.0.0
 //
-//  Date: 2 Aug 2014
+//  Date: 1 Sep 2014
 //
 //========================================================================================
 
@@ -109,9 +109,9 @@ begin
                                     gcbytStepField])
      else
      if frmDataEntry.rbtUHF.Checked then
-       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrUHFStep)
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrConfigUHFStep)
      else
-       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrVHFStep);
+       frmDataEntry.cbxStep.ItemIndex := StrToInt(gcstrConfigVHFStep);
 
      //====================================================
     // Set the Tone Checkboxes and Tone Frequency Combobox
@@ -230,10 +230,10 @@ begin
   // Step Size
   if frmdataEntry.rbtVHF.Checked then
     gvstrVHFChannelDataArray[frmDataEntry.vbytChannelNumber, gcbytStepField] :=
-      gcstrVHFStep
+      gcstrConfigVHFStep
   else
     gvstrVHFChannelDataArray[frmDataEntry.vbytChannelNumber, gcbytStepField] :=
-      gcstrUHFStep;
+      gcstrConfigUHFStep;
 
   // Shift Indicator
   if frmDataEntry.rbtSimplex.Checked then
